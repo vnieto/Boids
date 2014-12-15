@@ -21,7 +21,7 @@
 // ===========================================================================
 //                                Project Files
 // ===========================================================================
-#include "Boids.h"
+//#include "Boids.h"
 
 
 
@@ -46,6 +46,9 @@ class Agent
     //                               Constructors
     // =======================================================================
     Agent(void);
+    Agent(int a_x, int a_y);
+    Agent(int a_x, int a_y, int a_vx, int a_vy);
+    Agent(int a_x, int a_y, int a_vx, int a_vy, int a_r);
 
     // =======================================================================
     //                                Destructor
@@ -105,9 +108,10 @@ class Agent
     int vx;
     int vy;
     int rayon;
-    static int G1;
-    static int G2;
-    static int G3;
+    static const int G1;
+    static const int G2;
+    static const int G3;
+    static const int R_DEFAULT;
 };
 
 
