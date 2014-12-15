@@ -48,7 +48,7 @@ class Agent
     Agent(void);
     Agent(int a_x, int a_y);
     Agent(int a_x, int a_y, int a_vx, int a_vy);
-    Agent(int a_x, int a_y, int a_vx, int a_vy, int a_r);
+    Agent(int a_x, int a_y, int a_vx, int a_vy, int a_r, int a_c);
 
     // =======================================================================
     //                                Destructor
@@ -107,11 +107,13 @@ class Agent
     int y;
     int vx;
     int vy;
-    int rayon;
+    int radius;
+    int contact;
     static const int G1;
     static const int G2;
     static const int G3;
     static const int R_DEFAULT;
+    static const int C_DEFAULT;
 };
 
 

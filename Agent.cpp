@@ -34,6 +34,7 @@ const int Agent::G1 = 1;
 const int Agent::G2 = 1;
 const int Agent::G3 = 1;
 const int Agent::R_DEFAULT = 10;
+const int Agent::C_DEFAULT = 2;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -43,7 +44,8 @@ Agent::Agent(void)
   y = 0;
   vx = 0;
   vy = 0;
-  rayon = R_DEFAULT;
+  radius = R_DEFAULT;
+  contact = C_DEFAULT;
 }
 
 Agent::Agent(int a_x, int a_y)
@@ -52,7 +54,8 @@ Agent::Agent(int a_x, int a_y)
   y = a_y;
   vx = 0;
   vy = 0;
-  rayon = R_DEFAULT;
+  radius = R_DEFAULT;
+  contact = C_DEFAULT;
 }
 
 Agent::Agent(int a_x, int a_y, int a_vx, int a_vy)
@@ -61,16 +64,18 @@ Agent::Agent(int a_x, int a_y, int a_vx, int a_vy)
   y = a_y;
   vx = a_vx;
   vy = a_vx;
-  rayon = R_DEFAULT;
+  radius = R_DEFAULT;
+  contact = C_DEFAULT;
 }
 
-Agent::Agent(int a_x, int a_y, int a_vx, int a_vy, int a_r)
+Agent::Agent(int a_x, int a_y, int a_vx, int a_vy, int a_r, int a_c)
 {
   x = a_x;
   y = a_y;
   vx = a_vx;
   vy = a_vx;
-  rayon = a_r;
+  radius = a_r;
+  contact = a_c;
 }
 
 // ===========================================================================
