@@ -107,6 +107,10 @@ class Agent
     int y;
     int vx;
     int vy;
+    int x_next;
+    int y_next;
+    int vx_next;
+    int vy_next;
     int radius;
     int contact;
     static const int G1;

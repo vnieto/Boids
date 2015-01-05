@@ -46,6 +46,17 @@ Boids::Boids(int a_N)
 	agents = new Agent[N];
 }
 
+Boids::Boids(int a_N, char R)
+{
+	N = a_N;
+	agents = new Agent[N];
+	for (int i=0; i<N; i++)
+	{
+		agents[i] = Prey((rand()%10+1),(rand()%10+1),(rand()%10+1),(rand()%10+1));
+	}
+}
+
+
 // ===========================================================================
 //                                  Destructor
 // ===========================================================================
