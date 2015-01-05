@@ -36,6 +36,42 @@
 // ===========================================================================
 Prey::Prey(void)
 {
+  x = 0;
+  y = 0;
+  vx = 0;
+  vy = 0;
+  radius = R_DEFAULT;
+  contact = C_DEFAULT;
+}
+
+Prey::Prey(int a_x, int a_y)
+{
+  x = a_x;
+  y = a_y;
+  vx = 0;
+  vy = 0;
+  radius = R_DEFAULT;
+  contact = C_DEFAULT;
+}
+
+Prey::Prey(int a_x, int a_y, int a_vx, int a_vy)
+{
+  x = a_x;
+  y = a_y;
+  vx = a_vx;
+  vy = a_vx;
+  radius = R_DEFAULT;
+  contact = C_DEFAULT;
+}
+
+Prey::Prey(int a_x, int a_y, int a_vx, int a_vy, int a_r, int a_c)
+{
+  x = a_x;
+  y = a_y;
+  vx = a_vx;
+  vy = a_vx;
+  radius = a_r;
+  contact = a_c;
 }
 
 // ===========================================================================

@@ -38,8 +38,21 @@
 // ===========================================================================
 int main(int argc, char* argv[])
 {
-  printf("Hello World !\n");
+  
+  Agent a1();
+  Agent a2(1,2);
+  Agent a3(0,1,1,1);
+  Agent a4(1,2,3,4,5,6);
+  Prey p1();
+  Prey p2(1,5);
+  Prey p3(0,0,5,5);
+  Prey p4(6,5,4,3,2,1);
 
+
+
+
+
+  printf("Successfully compilated.\n");
   return 0;
 }
 
