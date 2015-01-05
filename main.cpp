@@ -47,12 +47,14 @@ int main(int argc, char* argv[])
   Prey p2(1,5);
   Prey p3(0,0,5,5);
   Prey p4(6,5,4,3,2,1);
+  Boids b(10);
 
 
 
 
 
   printf("Successfully compilated.\n");
+  // git add Makefile main.cpp Boids.cpp Boids.h Agent.cpp Agent.h Prey.cpp Prey.h
   return 0;
 }
 
