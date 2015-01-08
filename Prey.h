@@ -57,8 +57,10 @@ class Prey : public Agent
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
-    int Get_x(void);
-    int Get_y(void);
+    int Get_x(void) const;
+    int Get_y(void) const;
+    int Get_vx(void) const;
+    int Get_vy(void) const;
 
     // =======================================================================
     //                            Accessors: setters
@@ -111,14 +113,25 @@ class Prey : public Agent
 // ===========================================================================
 //                              Getters' definitions
 // ===========================================================================
-int Prey::Get_x(void)
+int Prey::Get_x(void) const
 {
   return x;
 }
 
-int Prey::Get_y(void)
+int Prey::Get_y(void) const
 {
   return y;
+
+}
+
+int Prey::Get_vx(void) const
+{
+  return vx;
+}
+
+int Prey::Get_vy(void) const
+{
+  return vy;
 }
 // ===========================================================================
 //                              Setters' definitions

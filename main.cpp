@@ -50,7 +50,6 @@ int main(int argc, char* argv[])
   Boids b(10,'r');
 
 
-
   printf("Successfully compilated.\n");
   // git add Makefile main.cpp Boids.cpp Boids.h Agent.cpp Agent.h Prey.cpp Prey.h
   return 0;

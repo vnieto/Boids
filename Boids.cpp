@@ -53,6 +53,7 @@ Boids::Boids(int a_N, char R)
 	for (int i=0; i<N; i++)
 	{
 		agents[i] = Prey((rand()%10+1),(rand()%10+1),(rand()%10+1),(rand()%10+1));
+		printf("agents[%d].x = %d\n",i,agents[i].Get_x());
 	}
 }
 
