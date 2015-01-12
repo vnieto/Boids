@@ -116,9 +116,6 @@ class Agent
     int vy_next;
     int radius;
     int contact;
-    static const int G1;
-    static const int G2;
-    static const int G3;
     static const int R_DEFAULT;
     static const int C_DEFAULT;
 };
@@ -127,26 +124,7 @@ class Agent
 // ===========================================================================
 //                              Getters' definitions
 // ===========================================================================
-/*int Agent::Get_x(void)
-{
-  return x;
-}
 
-int Agent::Get_y(void)
-{
-  return y;
-
-}
-
-int Agent::Get_vx(void)
-{
-  return vx;
-}
-
-int Agent::Get_vy(void)
-{
-  return vy;
-}*/
 // ===========================================================================
 //                              Setters' definitions
 // ===========================================================================

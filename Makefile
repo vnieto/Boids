@@ -2,7 +2,7 @@
 all: main
 
 main: 	main.o Boids.o Agent.o Prey.o
-	g++ -Wall main.o Boids.o Agent.o Prey.o -o main -g
+	g++ -Wall -o main main.o Boids.o Agent.o Prey.o -g
 
 main.o: main.cpp
 	g++ -Wall -c main.cpp -o main.o -g
