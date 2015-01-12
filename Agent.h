@@ -58,10 +58,10 @@ class Agent
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
-    virtual int Get_x(void) const;
-    virtual int Get_y(void) const;
-    virtual int Get_vx(void) const;
-    virtual int Get_vy(void) const;
+    virtual int Get_x(void) const =0;
+    virtual int Get_y(void) const =0;
+    virtual int Get_vx(void) const =0;
+    virtual int Get_vy(void) const =0;
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================

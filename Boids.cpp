@@ -36,24 +36,24 @@
 // ===========================================================================
 Boids::Boids(void)
 {
-  agents = NULL;
+  preys = NULL;
   N = 0;
 }
 
 Boids::Boids(int a_N)
 {
 	N = a_N;
-	agents = new Agent[N];
+	preys = new Prey[N];
 }
 
 Boids::Boids(int a_N, char R)
 {
 	N = a_N;
-	agents = new Agent[N];
+	preys = new Prey[N];
 	for (int i=0; i<N; i++)
 	{
-		agents[i] = Prey((rand()%10+1),(rand()%10+1),(rand()%10+1),(rand()%10+1));
-		printf("agents[%d].x = %d\n",i,agents[i].Get_x());
+		preys[i] = Prey((rand()%10+1),(rand()%10+1),(rand()%10+1),(rand()%10+1));
+		printf("preys[%d].x = %d\n",i,preys[i].Get_x());
 	}
 }
 

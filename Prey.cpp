@@ -59,7 +59,7 @@ Prey::Prey(int a_x, int a_y, int a_vx, int a_vy)
   x = a_x;
   y = a_y;
   vx = a_vx;
-  vy = a_vx;
+  vy = a_vy;
   radius = R_DEFAULT;
   contact = C_DEFAULT;
 }
@@ -69,7 +69,7 @@ Prey::Prey(int a_x, int a_y, int a_vx, int a_vy, int a_r, int a_c)
   x = a_x;
   y = a_y;
   vx = a_vx;
-  vy = a_vx;
+  vy = a_vy;
   radius = a_r;
   contact = a_c;
 }

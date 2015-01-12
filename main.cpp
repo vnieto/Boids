@@ -39,19 +39,15 @@
 int main(int argc, char* argv[])
 {
   
-  Agent a1();
-  Agent a2(1,2);
-  Agent a3(0,1,1,1);
-  Agent a4(1,2,3,4,5,6);
   Prey p1();
   Prey p2(1,5);
   Prey p3(0,0,5,5);
   Prey p4(6,5,4,3,2,1);
   Boids b(10,'r');
-
+  printf("p4.x=%d\tp4.y=%d\tp4.vx=%d\tp4.vy=%d\n",
+    p4.Get_x(),p4.Get_y(),p4.Get_vx(),p4.Get_vy());
 
   printf("Successfully compilated.\n");
-  // git add Makefile main.cpp Boids.cpp Boids.h Agent.cpp Agent.h Prey.cpp Prey.h
   return 0;
 }
 
