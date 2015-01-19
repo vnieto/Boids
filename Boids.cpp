@@ -29,6 +29,8 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
+const int Boids::MAX_X = 640;
+const int Boids::MAX_Y = 480;
 
 // ===========================================================================
 //                                  Constructors
@@ -69,7 +71,7 @@ Boids::~Boids(void)
 // ===========================================================================
 int Boids::window(void)
 {
-	bwindow win(640,480);
+	bwindow win(MAX_X,MAX_Y);
     printf("%d\n",win.init());
     win.map();
     for(;;)
@@ -112,6 +114,12 @@ int Boids::change_position_prey(void)
 {
 	for(int i = 0; i<N; i++)
   			{// equation (1)
+  				if (preys[i].Get_x())
+  				{
+
+  				}
+
+
   				preys[i].Set_x_next(preys[i].Get_x()+preys[i].Get_vx()/20);
   				preys[i].Set_y_next(preys[i].Get_y()+preys[i].Get_vy()/20);
   			}

@@ -107,6 +107,8 @@ class Boids
     int N;
     int dt;
     int t;
+    static const int MAX_X;
+    static const int MAX_Y;
 };
 
 
