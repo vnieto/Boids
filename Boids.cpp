@@ -29,8 +29,8 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const int Boids::MAX_X = 640;
-const int Boids::MAX_Y = 480;
+const int Boids::MAX_X = 800;
+const int Boids::MAX_Y = 600;
 
 // ===========================================================================
 //                                  Constructors
@@ -53,7 +53,7 @@ Boids::Boids(int a_N, char R)
 	preys = new Prey[N];
 	for (int i=0; i<N; i++)
 	{
-		preys[i] = Prey((rand()%640+1),(rand()%480+1),(rand()%4-2),(rand()%4-2));
+		preys[i] = Prey((rand()%MAX_X+1),(rand()%MAX_Y+1),(rand()%4-2),(rand()%4-2));
 		printf("preys[%d].x = %d\n",i,preys[i].Get_x());
 	}
 }
@@ -113,13 +113,17 @@ int Boids::window(void)
 int Boids::change_position_prey(void)
 {
 	for(int i = 0; i<N; i++)
-  			{// equation (1)
-  				if (preys[i].Get_x())
+  			{
+  				if (preys[i].Get_x()<0 || preys[i].Get_x()>MAX_X)
   				{
-
+  					preys[i].Set_vx(-preys[i].Get_vx());
+  				}
+					if (preys[i].Get_y()<0 || preys[i].Get_y()>MAX_Y)
+  				{
+  					preys[i].Set_vy(-preys[i].Get_vy());
   				}
 
-
+  				// equation (1)
   				preys[i].Set_x_next(preys[i].Get_x()+preys[i].Get_vx()/20);
   				preys[i].Set_y_next(preys[i].Get_y()+preys[i].Get_vy()/20);
   			}
