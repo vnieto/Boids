@@ -46,9 +46,9 @@ class Agent
     //                               Constructors
     // =======================================================================
     Agent(void);
-    Agent(int a_x, int a_y);
-    Agent(int a_x, int a_y, int a_vx, int a_vy);
-    Agent(int a_x, int a_y, int a_vx, int a_vy, int a_r, int a_c);
+    Agent(float a_x, float a_y);
+    Agent(float a_x, float a_y, float a_vx, float a_vy);
+    Agent(float a_x, float a_y, float a_vx, float a_vy, float a_r, float a_c);
 
     // =======================================================================
     //                                Destructor
@@ -58,25 +58,25 @@ class Agent
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
-    virtual int Get_x(void) const =0;
-    virtual int Get_y(void) const =0;
-    virtual int Get_vx(void) const =0;
-    virtual int Get_vy(void) const =0;
-    virtual int Get_x_next(void) const =0;
-    virtual int Get_y_next(void) const =0;
-    virtual int Get_vx_next(void) const =0;
-    virtual int Get_vy_next(void) const =0;
+    virtual float Get_x(void) const =0;
+    virtual float Get_y(void) const =0;
+    virtual float Get_vx(void) const =0;
+    virtual float Get_vy(void) const =0;
+    virtual float Get_x_next(void) const =0;
+    virtual float Get_y_next(void) const =0;
+    virtual float Get_vx_next(void) const =0;
+    virtual float Get_vy_next(void) const =0;
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
-    virtual void Set_x(int a_x) =0;
-    virtual void Set_y(int a_y) =0;
-    virtual void Set_vx(int a_vx) =0;
-    virtual void Set_vy(int a_vy) =0;
-    virtual void Set_x_next(int a_x) =0;
-    virtual void Set_y_next(int a_y) =0;
-    virtual void Set_vx_next(int a_vx) =0;
-    virtual void Set_vy_next(int a_vy) =0;
+    virtual void Set_x(float a_x) =0;
+    virtual void Set_y(float a_y) =0;
+    virtual void Set_vx(float a_vx) =0;
+    virtual void Set_vy(float a_vy) =0;
+    virtual void Set_x_next(float a_x) =0;
+    virtual void Set_y_next(float a_y) =0;
+    virtual void Set_vx_next(float a_vx) =0;
+    virtual void Set_vy_next(float a_vy) =0;
     // =======================================================================
     //                                Operators
     // =======================================================================
@@ -117,18 +117,18 @@ class Agent
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
-    int x;
-    int y;
-    int vx;
-    int vy;
-    int x_next;
-    int y_next;
-    int vx_next;
-    int vy_next;
-    int radius;
-    int contact;
-    static const int R_DEFAULT;
-    static const int C_DEFAULT;
+    float x;
+    float y;
+    float vx;
+    float vy;
+    float x_next;
+    float y_next;
+    float vx_next;
+    float vy_next;
+    float radius;
+    float contact;
+    static const float R_DEFAULT;
+    static const float C_DEFAULT;
 };
 
 

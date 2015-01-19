@@ -45,9 +45,9 @@ class Prey : public Agent
     //                               Constructors
     // =======================================================================
     Prey(void);
-    Prey(int a_x, int a_y);
-    Prey(int a_x, int a_y, int a_vx, int a_vy);
-    Prey(int a_x, int a_y, int a_vx, int a_vy, int a_r, int a_c);
+    Prey(float a_x, float a_y);
+    Prey(float a_x, float a_y, float a_vx, float a_vy);
+    Prey(float a_x, float a_y, float a_vx, float a_vy, float a_r, float a_c);
     // =======================================================================
     //                                Destructor
     // =======================================================================
@@ -56,25 +56,25 @@ class Prey : public Agent
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
-    inline int Get_x(void) const;
-    inline int Get_y(void) const;
-    inline int Get_vx(void) const;
-    inline int Get_vy(void) const;
-    inline int Get_x_next(void) const;
-    inline int Get_y_next(void) const;
-    inline int Get_vx_next(void) const;
-    inline int Get_vy_next(void) const;
+    inline float Get_x(void) const;
+    inline float Get_y(void) const;
+    inline float Get_vx(void) const;
+    inline float Get_vy(void) const;
+    inline float Get_x_next(void) const;
+    inline float Get_y_next(void) const;
+    inline float Get_vx_next(void) const;
+    inline float Get_vy_next(void) const;
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
-    inline void Set_x(int a_x);
-    inline void Set_y(int a_y);
-    inline void Set_vx(int a_vx);
-    inline void Set_vy(int a_vy);
-    inline void Set_x_next(int a_x);
-    inline void Set_y_next(int a_y);
-    inline void Set_vx_next(int a_vx);
-    inline void Set_vy_next(int a_vy);
+    inline void Set_x(float a_x);
+    inline void Set_y(float a_y);
+    inline void Set_vx(float a_vx);
+    inline void Set_vy(float a_vy);
+    inline void Set_x_next(float a_x);
+    inline void Set_y_next(float a_y);
+    inline void Set_vx_next(float a_vx);
+    inline void Set_vy_next(float a_vy);
     // =======================================================================
     //                                Operators
     // =======================================================================
@@ -123,44 +123,44 @@ class Prey : public Agent
 // ===========================================================================
 //                              Getters' definitions
 // ===========================================================================
-inline int Prey::Get_x(void) const
+inline float Prey::Get_x(void) const
 {
   return x;
 }
 
-inline int Prey::Get_y(void) const
+inline float Prey::Get_y(void) const
 {
   return y;
 
 }
 
-inline int Prey::Get_vx(void) const
+inline float Prey::Get_vx(void) const
 {
   return vx;
 }
 
-inline int Prey::Get_vy(void) const
+inline float Prey::Get_vy(void) const
 {
   return vy;
 }
 
-inline int Prey::Get_x_next(void) const
+inline float Prey::Get_x_next(void) const
 {
   return x_next;
 }
 
-inline int Prey::Get_y_next(void) const
+inline float Prey::Get_y_next(void) const
 {
   return y_next;
 
 }
 
-inline int Prey::Get_vx_next(void) const
+inline float Prey::Get_vx_next(void) const
 {
   return vx_next;
 }
 
-inline int Prey::Get_vy_next(void) const
+inline float Prey::Get_vy_next(void) const
 {
   return vy_next;
 }
@@ -168,42 +168,42 @@ inline int Prey::Get_vy_next(void) const
 // ===========================================================================
 //                              Setters' definitions
 // ===========================================================================
-inline void Prey::Set_x_next(int a_x)
+inline void Prey::Set_x_next(float a_x)
 {
   x_next = a_x;
 }
 
-inline void Prey::Set_y_next(int a_y)
+inline void Prey::Set_y_next(float a_y)
 {
   y_next = a_y;
 }
 
-inline void Prey::Set_vx_next(int a_vx)
+inline void Prey::Set_vx_next(float a_vx)
 {
   vx_next = a_vx;
 }
 
-inline void Prey::Set_vy_next(int a_vy)
+inline void Prey::Set_vy_next(float a_vy)
 {
   vy_next = a_vy;
 }
 
-inline void Prey::Set_x(int a_x)
+inline void Prey::Set_x(float a_x)
 {
   x = a_x;
 }
 
-inline void Prey::Set_y(int a_y)
+inline void Prey::Set_y(float a_y)
 {
   y = a_y;
 }
 
-inline void Prey::Set_vx(int a_vx)
+inline void Prey::Set_vx(float a_vx)
 {
   vx = a_vx;
 }
 
-inline void Prey::Set_vy(int a_vy)
+inline void Prey::Set_vy(float a_vy)
 {
   vy = a_vy;
 }

@@ -100,6 +100,7 @@ int Boids::window(void)
   				win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0xFF0000);
   			}
   		change_position_prey();
+  		change_velocity_prey();
 
     	}
   return 0;
@@ -110,17 +111,52 @@ int Boids::window(void)
 int Boids::change_position_prey(void)
 {
 	for(int i = 0; i<N; i++)
-  			{
-  				preys[i].Set_x_next(preys[i].Get_x()+preys[i].Get_vx());
-  				preys[i].Set_y_next(preys[i].Get_y()+preys[i].Get_vy());
+  			{// equation (1)
+  				preys[i].Set_x_next(preys[i].Get_x()+preys[i].Get_vx()/20);
+  				preys[i].Set_y_next(preys[i].Get_y()+preys[i].Get_vy()/20);
   			}
 	for(int i = 0; i<N; i++)
   			{
   				preys[i].Set_x(preys[i].Get_x_next());
   				preys[i].Set_y(preys[i].Get_y_next());
-  				printf("preys[%d].x = %d\t",i,preys[i].Get_x());
-  				printf("preys[%d].y = %d\n",i,preys[i].Get_y());
+  				printf("preys[%d].x = %lf\t",i,preys[i].Get_x());
+  				printf("preys[%d].y = %lf\n",i,preys[i].Get_y());
   			}
+	return 0;
+}
+
+
+
+int Boids::change_velocity_prey(void)
+{
+	for(int i = 0; i<N; i++)
+  			{
+  				preys[i].Set_vx_next(preys[i].Get_vx()+(rand()%3-1));
+  				preys[i].Set_vy_next(preys[i].Get_vy()+(rand()%3-1));
+  			}
+	for(int i = 0; i<N; i++)
+  			{
+  				preys[i].Set_vx(preys[i].Get_vx_next());
+  				preys[i].Set_vy(preys[i].Get_vy_next());
+  				printf("preys[%d].vx = %lf\t",i,preys[i].Get_vx());
+  				printf("preys[%d].vy = %lf\n",i,preys[i].Get_vy());
+  			}
+	return 0;
+}
+
+
+double Boids::v1(int i)
+{
+  double vxi, vyi;
+  for (int j=0; j<N; j++)
+    {
+      vxi = vxi + preys[j].Get_vx() - preys[i].Get_vx();
+      vyi = vyi + preys[j].Get_vy() - preys[i].Get_vy();
+    }
+  vxi = vxi/N;
+  vyi = vyi/N;
+  preys[i].Set_vx_next(vxi);
+  preys[i].Set_vx_next(vyi);
 	return 0;
 }
 // ===========================================================================

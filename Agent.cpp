@@ -30,8 +30,8 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const int Agent::R_DEFAULT = 10;
-const int Agent::C_DEFAULT = 2;
+const float Agent::R_DEFAULT = 10;
+const float Agent::C_DEFAULT = 2;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -45,7 +45,7 @@ Agent::Agent(void)
   contact = C_DEFAULT;
 }
 
-Agent::Agent(int a_x, int a_y)
+Agent::Agent(float a_x, float a_y)
 {
   x = a_x;
   y = a_y;
@@ -55,7 +55,7 @@ Agent::Agent(int a_x, int a_y)
   contact = C_DEFAULT;
 }
 
-Agent::Agent(int a_x, int a_y, int a_vx, int a_vy)
+Agent::Agent(float a_x, float a_y, float a_vx, float a_vy)
 {
   x = a_x;
   y = a_y;
@@ -65,7 +65,7 @@ Agent::Agent(int a_x, int a_y, int a_vx, int a_vy)
   contact = C_DEFAULT;
 }
 
-Agent::Agent(int a_x, int a_y, int a_vx, int a_vy, int a_r, int a_c)
+Agent::Agent(float a_x, float a_y, float a_vx, float a_vy, float a_r, float a_c)
 {
   x = a_x;
   y = a_y;

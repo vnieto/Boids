@@ -46,7 +46,7 @@ Prey::Prey(void)
   contact = C_DEFAULT;
 }
 
-Prey::Prey(int a_x, int a_y)
+Prey::Prey(float a_x, float a_y)
 {
   x = a_x;
   y = a_y;
@@ -56,7 +56,7 @@ Prey::Prey(int a_x, int a_y)
   contact = C_DEFAULT;
 }
 
-Prey::Prey(int a_x, int a_y, int a_vx, int a_vy)
+Prey::Prey(float a_x, float a_y, float a_vx, float a_vy)
 {
   x = a_x;
   y = a_y;
@@ -66,7 +66,7 @@ Prey::Prey(int a_x, int a_y, int a_vx, int a_vy)
   contact = C_DEFAULT;
 }
 
-Prey::Prey(int a_x, int a_y, int a_vx, int a_vy, int a_r, int a_c)
+Prey::Prey(float a_x, float a_y, float a_vx, float a_vy, float a_r, float a_c)
 {
   x = a_x;
   y = a_y;
