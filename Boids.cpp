@@ -51,7 +51,7 @@ Boids::Boids(int a_N, char R)
 	preys = new Prey[N];
 	for (int i=0; i<N; i++)
 	{
-		preys[i] = Prey((rand()%200+1),(rand()%200+1),(rand()%10+1),(rand()%10+1));
+		preys[i] = Prey((rand()%640+1),(rand()%480+1),(rand()%10+1),(rand()%10+1));
 		printf("preys[%d].x = %d\n",i,preys[i].Get_x());
 	}
 }
@@ -87,13 +87,17 @@ int Boids::window(void)
 				printf("expose\n"); break;
 	    		case BCONFIGURE:
 				printf("configure\n"); break;
-				}	
-			win.draw_point(100,100,0xFF00);
-			win.draw_line(100,100,200,200,0xFF0000);
-			win.draw_text(10,10,0x0,"Hello World",strlen("Hello World"));
-			win.draw_square(200,200,220,220,0xFF00);
-			win.draw_fsquare(400,400,440,440,0xFF00);
+				}
+			//win.draw_point(100,100,0xFF00);
+			//win.draw_line(100,100,200,200,0xFF0000);
+			//win.draw_text(10,10,0x0,"Hello World",strlen("Hello World"));
+			//win.draw_square(200,200,220,220,0xFF00);
+			//win.draw_fsquare(400,400,440,440,0xFF00);
 
+  		for(int i = 0; i<N; i++)
+  			{
+  				win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0xFF0000);
+  			}
 
     	}
   return 0;
@@ -101,11 +105,7 @@ int Boids::window(void)
 // ===========================================================================
 //                                Protected Methods
 // ===========================================================================
-int Boids::draw_prey(void)
-{
 
-	return 0;
-}
 // ===========================================================================
 //                               Non inline accessors
 // ===========================================================================
