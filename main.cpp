@@ -36,14 +36,15 @@
 // ===========================================================================
 int main(int argc, char* argv[])
 {
-  inline 
   Prey p1();
   Prey p2(1,5);
   Prey p3(0,0,5,5);
   Prey p4(6,5,4,3,2,1);
-  Boids b(10,'r');
   printf("p4.x=%d\tp4.y=%d\tp4.vx=%d\tp4.vy=%d\n",
     p4.Get_x(),p4.Get_y(),p4.Get_vx(),p4.Get_vy());
+
+
+  Boids b(15,'r');
   b.window();
   printf("Successfully compilated.\n");
   return 0;

@@ -51,7 +51,7 @@ Boids::Boids(int a_N, char R)
 	preys = new Prey[N];
 	for (int i=0; i<N; i++)
 	{
-		preys[i] = Prey((rand()%640+1),(rand()%480+1),(rand()%10+1),(rand()%10+1));
+		preys[i] = Prey((rand()%640+1),(rand()%480+1),(rand()%4-2),(rand()%4-2));
 		printf("preys[%d].x = %d\n",i,preys[i].Get_x());
 	}
 }
@@ -94,11 +94,12 @@ int Boids::window(void)
 			//win.draw_square(200,200,220,220,0xFF00);
 			//win.draw_fsquare(400,400,440,440,0xFF00);
 
+			// Drawing of the boids
   		for(int i = 0; i<N; i++)
   			{
   				win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0xFF0000);
-
   			}
+  		change_position_prey();
 
     	}
   return 0;
@@ -110,12 +111,15 @@ int Boids::change_position_prey(void)
 {
 	for(int i = 0; i<N; i++)
   			{
-  				//prey[i].Set_x_next(prey[i].Get_x()+prey[i].Get_vx());
-  				//prey[i].Set_y_next(prey[i].Get_y()+prey[i].Get_vy());
+  				preys[i].Set_x_next(preys[i].Get_x()+preys[i].Get_vx());
+  				preys[i].Set_y_next(preys[i].Get_y()+preys[i].Get_vy());
   			}
 	for(int i = 0; i<N; i++)
   			{
-  				
+  				preys[i].Set_x(preys[i].Get_x_next());
+  				preys[i].Set_y(preys[i].Get_y_next());
+  				printf("preys[%d].x = %d\t",i,preys[i].Get_x());
+  				printf("preys[%d].y = %d\n",i,preys[i].Get_y());
   			}
 	return 0;
 }

@@ -146,23 +146,23 @@ inline int Prey::Get_vy(void) const
 
 inline int Prey::Get_x_next(void) const
 {
-  return x;
+  return x_next;
 }
 
 inline int Prey::Get_y_next(void) const
 {
-  return y;
+  return y_next;
 
 }
 
 inline int Prey::Get_vx_next(void) const
 {
-  return vx;
+  return vx_next;
 }
 
 inline int Prey::Get_vy_next(void) const
 {
-  return vy;
+  return vy_next;
 }
 
 // ===========================================================================
@@ -190,22 +190,22 @@ inline void Prey::Set_vy_next(int a_vy)
 
 inline void Prey::Set_x(int a_x)
 {
-  x_next = a_x;
+  x = a_x;
 }
 
 inline void Prey::Set_y(int a_y)
 {
-  y_next = a_y;
+  y = a_y;
 }
 
 inline void Prey::Set_vx(int a_vx)
 {
-  vx_next = a_vx;
+  vx = a_vx;
 }
 
 inline void Prey::Set_vy(int a_vy)
 {
-  vy_next = a_vy;
+  vy = a_vy;
 }
 
 // ===========================================================================
