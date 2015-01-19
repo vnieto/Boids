@@ -17,7 +17,7 @@
 //                                 Project Files
 // ===========================================================================
 #include "Boids.h"
-#include "bwindow.h"
+//#include "bwindow.h"
 
 
 //############################################################################
@@ -40,10 +40,7 @@ Boids::Boids(void)
 }
 
 Boids::Boids(int a_N)
-{//                                                                           #
-// s                          Class Boids                                     #
-//                                                                           #
-
+{ 
 	N = a_N;
 	preys = new Prey[N];
 }
@@ -54,7 +51,7 @@ Boids::Boids(int a_N, char R)
 	preys = new Prey[N];
 	for (int i=0; i<N; i++)
 	{
-		preys[i] = Prey((rand()%10+1),(rand()%10+1),(rand()%10+1),(rand()%10+1));
+		preys[i] = Prey((rand()%200+1),(rand()%200+1),(rand()%10+1),(rand()%10+1));
 		printf("preys[%d].x = %d\n",i,preys[i].Get_x());
 	}
 }
@@ -70,52 +67,44 @@ Boids::~Boids(void)
 // ===========================================================================
 //                                 Public Methods
 // ===========================================================================
-
-// ===========================================================================
-//                                Protected Methods
-// ===========================================================================
 int Boids::window(void)
-{/*
+{
 	bwindow win(640,480);
     printf("%d\n",win.init());
     win.map();
     for(;;)
     {
-	int ev = win.parse_event();
-	switch(ev)
-	{
-	    case BKPRESS :
-		printf("keypressed\n"); 
-		printf("key : %s\n",win.get_lastkey());
-		break;
-	    case BBPRESS:
-		printf("buttonpressed\n"); break;
-	    case BEXPOSE:
-		printf("expose\n"); break;
-	    case BCONFIGURE:
-		printf("configure\n#include "Boids.h"
-"); break;
-	}	
-	win.draw_point(100,100,0xFF00);
-	win.draw_line(100,100,200,200,0xFF0000);
-	win.draw_text(10,10,0x0,"Hello World",strlen("Hello World"));
-	win.draw_square(200,200,220,220,0xFF00);
-	win.draw_fsquare(400,400,440,440,0xFF00);
-  
-	int rx,ry;
-	for (int i = 0; i<5000000000; i+=5)
-	{
-		win.draw_point(120+i/100000,140+i/100000,0xFF0000);
-		if (i%10000=0)
-		{
-			rx = (rand()%480+1);
-			ry = (rand()%480+1);
-			win.draw_square(rx,ry,rx+20,ry+20,0xFF00);
-		}
-	}
+			int ev = win.parse_event();
+			switch(ev)
+				{
+	    		case BKPRESS :
+						printf("keypressed\n"); 
+						printf("key : %s\n",win.get_lastkey());
+						break;
+	    		case BBPRESS:
+				printf("buttonpressed\n"); break;
+	  		  case BEXPOSE:
+				printf("expose\n"); break;
+	    		case BCONFIGURE:
+				printf("configure\n"); break;
+				}	
+			win.draw_point(100,100,0xFF00);
+			win.draw_line(100,100,200,200,0xFF0000);
+			win.draw_text(10,10,0x0,"Hello World",strlen("Hello World"));
+			win.draw_square(200,200,220,220,0xFF00);
+			win.draw_fsquare(400,400,440,440,0xFF00);
 
-    }*/
-    return 0;
+
+    	}
+  return 0;
+}
+// ===========================================================================
+//                                Protected Methods
+// ===========================================================================
+int Boids::draw_prey(void)
+{
+
+	return 0;
 }
 // ===========================================================================
 //                               Non inline accessors

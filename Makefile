@@ -1,13 +1,13 @@
 
 all: main
 
-main: 	main.o Boids.o Agent.o Prey.o
-	g++ -Wall -o main main.o Boids.o Agent.o Prey.o -g
+main: 	main.o Boids.o Agent.o Prey.o bwindow.o
+	g++ -Wall -o main main.o Boids.o Agent.o Prey.o bwindow.o -g  -lX11 -L/usr/X11R6/lib
 
 main.o: main.cpp
 	g++ -Wall -c main.cpp -o main.o -g
 
-Boids.o:Agent.h Boids.h Boids.cpp bwindow.o
+Boids.o:Agent.h Boids.h Boids.cpp bwindow.h
 	g++ -Wall -c Boids.cpp -o Boids.o -g
 
 
