@@ -100,6 +100,7 @@ class Boids
     int change_position_prey(void);
     int change_velocity_prey(void);
     double v1(int i);
+    //double v2(int i);
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================

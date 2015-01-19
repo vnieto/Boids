@@ -114,6 +114,7 @@ int Boids::change_position_prey(void)
 {
 	for(int i = 0; i<N; i++)
   			{
+  				// Forbide the boids to leave the window
   				if (preys[i].Get_x()<0 || preys[i].Get_x()>MAX_X)
   				{
   					preys[i].Set_vx(-preys[i].Get_vx());
@@ -129,6 +130,7 @@ int Boids::change_position_prey(void)
   			}
 	for(int i = 0; i<N; i++)
   			{
+  				// Apply the computed positions
   				preys[i].Set_x(preys[i].Get_x_next());
   				preys[i].Set_y(preys[i].Get_y_next());
   				printf("preys[%d].x = %lf\t",i,preys[i].Get_x());
@@ -143,8 +145,9 @@ int Boids::change_velocity_prey(void)
 {
 	for(int i = 0; i<N; i++)
   			{
-  				preys[i].Set_vx_next(preys[i].Get_vx()+(rand()%3-1));
-  				preys[i].Set_vy_next(preys[i].Get_vy()+(rand()%3-1));
+  				int range = 3; // range of random change
+  				preys[i].Set_vx_next(preys[i].Get_vx()+(rand()%(range)-range/2));
+  				preys[i].Set_vy_next(preys[i].Get_vy()+(rand()%(range)-range/2));
   			}
 	for(int i = 0; i<N; i++)
   			{

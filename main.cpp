@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
     p4.Get_x(),p4.Get_y(),p4.Get_vx(),p4.Get_vy());
 
 
-  Boids b(16,'r');
+  Boids b(12,'r');
   b.window();
   printf("Successfully compilated.\n");
   return 0;
