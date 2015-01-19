@@ -97,6 +97,7 @@ int Boids::window(void)
   		for(int i = 0; i<N; i++)
   			{
   				win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0xFF0000);
+
   			}
 
     	}
@@ -105,7 +106,19 @@ int Boids::window(void)
 // ===========================================================================
 //                                Protected Methods
 // ===========================================================================
-
+int Boids::change_position_prey(void)
+{
+	for(int i = 0; i<N; i++)
+  			{
+  				//prey[i].Set_x_next(prey[i].Get_x()+prey[i].Get_vx());
+  				//prey[i].Set_y_next(prey[i].Get_y()+prey[i].Get_vy());
+  			}
+	for(int i = 0; i<N; i++)
+  			{
+  				
+  			}
+	return 0;
+}
 // ===========================================================================
 //                               Non inline accessors
 // ===========================================================================

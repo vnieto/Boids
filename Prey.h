@@ -60,9 +60,17 @@ class Prey : public Agent
     inline int Get_y(void) const;
     inline int Get_vx(void) const;
     inline int Get_vy(void) const;
+    inline int Get_x_next(void) const;
+    inline int Get_y_next(void) const;
+    inline int Get_vx_next(void) const;
+    inline int Get_vy_next(void) const;
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
+    inline void Set_x(int a_x);
+    inline void Set_y(int a_y);
+    inline void Set_vx(int a_vx);
+    inline void Set_vy(int a_vy);
     inline void Set_x_next(int a_x);
     inline void Set_y_next(int a_y);
     inline void Set_vx_next(int a_vx);
@@ -135,6 +143,28 @@ inline int Prey::Get_vy(void) const
 {
   return vy;
 }
+
+inline int Prey::Get_x_next(void) const
+{
+  return x;
+}
+
+inline int Prey::Get_y_next(void) const
+{
+  return y;
+
+}
+
+inline int Prey::Get_vx_next(void) const
+{
+  return vx;
+}
+
+inline int Prey::Get_vy_next(void) const
+{
+  return vy;
+}
+
 // ===========================================================================
 //                              Setters' definitions
 // ===========================================================================
@@ -157,6 +187,27 @@ inline void Prey::Set_vy_next(int a_vy)
 {
   vy_next = a_vy;
 }
+
+inline void Prey::Set_x(int a_x)
+{
+  x_next = a_x;
+}
+
+inline void Prey::Set_y(int a_y)
+{
+  y_next = a_y;
+}
+
+inline void Prey::Set_vx(int a_vx)
+{
+  vx_next = a_vx;
+}
+
+inline void Prey::Set_vy(int a_vy)
+{
+  vy_next = a_vy;
+}
+
 // ===========================================================================
 //                             Operators' definitions
 // ===========================================================================

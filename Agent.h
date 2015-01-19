@@ -62,9 +62,17 @@ class Agent
     virtual int Get_y(void) const =0;
     virtual int Get_vx(void) const =0;
     virtual int Get_vy(void) const =0;
+    virtual int Get_x_next(void) const =0;
+    virtual int Get_y_next(void) const =0;
+    virtual int Get_vx_next(void) const =0;
+    virtual int Get_vy_next(void) const =0;
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
+    virtual void Set_x(int a_x) =0;
+    virtual void Set_y(int a_y) =0;
+    virtual void Set_vx(int a_vx) =0;
+    virtual void Set_vy(int a_vy) =0;
     virtual void Set_x_next(int a_x) =0;
     virtual void Set_y_next(int a_y) =0;
     virtual void Set_vx_next(int a_vx) =0;
