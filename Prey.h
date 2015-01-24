@@ -64,6 +64,9 @@ class Prey : public Agent
     inline float Get_y_next(void) const;
     inline float Get_vx_next(void) const;
     inline float Get_vy_next(void) const;
+    inline float Get_G1(void) const;
+    inline float Get_G2(void) const;
+    inline float Get_G3(void) const;
     inline float Get_PERCEPTION_RADIUS(void) const;
     inline float Get_CONTACT_RADIUS(void) const;
     // =======================================================================
@@ -167,6 +170,21 @@ inline float Prey::Get_vx_next(void) const
 inline float Prey::Get_vy_next(void) const
 {
   return vy_next;
+}
+
+inline float Prey::Get_G1(void) const
+{
+  return G1;
+}
+
+inline float Prey::Get_G2(void) const
+{
+  return G2;
+}
+
+inline float Prey::Get_G3(void) const
+{
+  return G3;
 }
 
 inline float Prey::Get_PERCEPTION_RADIUS(void) const

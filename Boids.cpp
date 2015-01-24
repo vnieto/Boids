@@ -32,7 +32,7 @@
 // ===========================================================================
 const int Boids::MAX_X = 800;
 const int Boids::MAX_Y = 600;
-const int Boids::MAX_V = 200;
+const int Boids::MAX_V = 100;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -55,7 +55,7 @@ Boids::Boids(int a_N, char R)
 	for (int i=0; i<N; i++)
 	{
 		preys[i] = Prey((rand()%MAX_X+1),(rand()%MAX_Y+1),(rand()%4-2),(rand()%4-2));
-		printf("preys[%d].x = %lf\n",i,preys[i].Get_x());
+		//printf("preys[%d].x = %lf\n",i,preys[i].Get_x());
 	}
 }
 
@@ -140,9 +140,9 @@ int Boids::change_position_prey(void)
   			{
   				// Apply the computed positions
   				preys[i].Set_x(preys[i].Get_x_next());
-  				preys[i].Set_y(preys[i].Get_y_next());
+  				preys[i].Set_y(preys[i].Get_y_next());/*
   				printf("preys[%d].x = %lf\t",i,preys[i].Get_x());
-  				printf("preys[%d].y = %lf\n",i,preys[i].Get_y());
+  				printf("preys[%d].y = %lf\n",i,preys[i].Get_y());*/
   			}
 	return 0;
 }
@@ -151,11 +151,16 @@ int Boids::change_position_prey(void)
 
 int Boids::change_velocity_prey(void)
 {
+  float G1 = preys[0].Get_G1();
+  float G2 = preys[0].Get_G2();
+  float G3 = preys[0].Get_G3();
 	for(int i = 0; i<N; i++)
-  			{
+  			{/*
   				int range = 3; // range of random change
   				preys[i].Set_vx_next(preys[i].Get_vx()+(rand()%(range)-range/2));
-  				preys[i].Set_vy_next(preys[i].Get_vy()+(rand()%(range)-range/2));
+  				preys[i].Set_vy_next(preys[i].Get_vy()+(rand()%(range)-range/2));*/
+          preys[i].Set_vx_next(preys[i].Get_vx()+(G1*v1_x(i)+G2*v2_x(i)+G3*v3_x(i)));
+          preys[i].Set_vy_next(preys[i].Get_vy()+(G1*v1_y(i)+G2*v2_y(i)+G3*v3_y(i)));
   			}
 	for(int i = 0; i<N; i++)
   			{/*
@@ -171,8 +176,8 @@ int Boids::change_velocity_prey(void)
           {
             preys[i].Set_vx(preys[i].Get_vx_next());
             preys[i].Set_vy(preys[i].Get_vy_next());
-            printf("preys[%d].vx = %lf\t",i,preys[i].Get_vx());
-            printf("preys[%d].vy = %lf\n",i,preys[i].Get_vy());
+            //printf("preys[%d].vx = %lf\t",i,preys[i].Get_vx());
+            //printf("preys[%d].vy = %lf\n",i,preys[i].Get_vy());
           } else 
           {
             /* Reduce the speed? /!\ /!\ /!\*/
@@ -187,15 +192,15 @@ int Boids::change_velocity_prey(void)
 }
 
 
-bool Boids::testradius(int i, int j)
+bool Boids::Is_in_range(int i, int j, float R)
 {
-  float xi,yi,xj,yj,R;
+  float xi,yi,xj,yj;
   xi = preys[i].Get_x();
   yi = preys[i].Get_y();
   xj = preys[j].Get_x();
   yj = preys[j].Get_y();
-  R = preys[i].Get_PERCEPTION_RADIUS();
-  if( sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < R)
+  if (i==j) return false;
+  if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < R)
   {
     return true;
   } else {
@@ -204,45 +209,108 @@ bool Boids::testradius(int i, int j)
 }
 
 
-int Boids::v1(int i)
+float Boids::v1_x(int i)
 {
-  double vxi, vyi;
+  int K = 0; // number of preys j in the PERCEPTION_RADIUS of the prey i
+  double vxi=0;
   for (int j=0; j<N; j++)
     {
-      if (testradius(i,j))
+      if (Is_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
-      vxi = vxi + preys[j].Get_vx() - preys[i].Get_vx();
-      vyi = vyi + preys[j].Get_vy() - preys[i].Get_vy();
+        vxi = vxi + preys[j].Get_vx() - preys[i].Get_vx();
+        K++;
       }
     }
-  vxi = vxi/N;
-  vyi = vyi/N;
-  preys[i].Set_vx_next(vxi);
-  preys[i].Set_vx_next(vyi);
-	return 0;
+  if (K==0) return 0; // Avoid impossible division
+  vxi = vxi/K;
+  return vxi;
 }
-
-
-int Boids::v2(int i)
+float Boids::v1_y(int i)
 {
-  double vxi, vyi;
+  int K = 0; // number of preys j in the PERCEPTION_RADIUS of the prey i
+  double vyi=0;
   for (int j=0; j<N; j++)
     {
-      vxi = vxi + preys[j].Get_x() - preys[i].Get_x();
-      vyi = vyi + preys[j].Get_y() - preys[i].Get_y();
+      if (Is_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
+      {
+        vyi = vyi + preys[j].Get_vy() - preys[i].Get_vy();
+        K++;
+      }
     }
-  vxi = vxi/N;
-  vyi = vyi/N;
-  preys[i].Set_vx_next(vxi);
-  preys[i].Set_vx_next(vyi);
-  return 0;
+  if (K==0) return 0; // Avoid impossible division
+  vyi = vyi/K;
+  return vyi;
 }
 
 
-int Boids::v3(int i)
+float Boids::v2_x(int i)
 {
-  
+  int K = 0; // number of preys j in the PERCEPTION_RADIUS of the prey i
+  double vxi=0;
+  for (int j=0; j<N; j++)
+    {
+      if (Is_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
+      {
+        vxi = vxi + preys[j].Get_x() - preys[i].Get_x();
+        K++;
+      }
+    }
+  if (K==0) return 0; // Avoid impossible division
+  vxi = vxi/K;
+  return vxi;
+}
+float Boids::v2_y(int i)
+{
+  int K = 0; // number of preys j in the PERCEPTION_RADIUS of the prey i
+  double vyi=0;
+  for (int j=0; j<N; j++)
+    {
+      if (Is_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
+      {
+        vyi = vyi + preys[j].Get_y() - preys[i].Get_y();
+        K++;
+      }
+    }
+  if (K==0) return 0; // Avoid impossible division
+  vyi = vyi/K;
+  return vyi;
   return 0;
+}
+
+// /!\ MUST CONSIDER OBSTACLES IN V3
+float Boids::v3_x(int i)
+{
+  int K = 0; // number of preys j in the CONTACT_RADIUS of the prey i
+  double vxi=0;
+  for (int j=0; j<N; j++)
+    {
+      if (Is_in_range(i,j,preys[i].Get_CONTACT_RADIUS()))
+      {
+        //vxi = vxi + 1/(preys[j].Get_x() - preys[i].Get_x());
+        vxi = vxi + preys[j].Get_x() - preys[i].Get_x();
+        K++;
+      }
+    }
+  if (K==0) return 0; // Avoid impossible division
+  vxi = - vxi/K;
+  return vxi;
+}
+float Boids::v3_y(int i)
+{
+  int K = 0; // number of preys j in the CONTACT_RADIUS of the prey i
+  double vyi=0;
+  for (int j=0; j<N; j++)
+    {
+      if (Is_in_range(i,j,preys[i].Get_CONTACT_RADIUS()))
+      {
+        //vyi = vyi + 1/(preys[j].Get_y() - preys[i].Get_y());
+        vyi = vyi + preys[j].Get_y() - preys[i].Get_y();
+        K++;
+      }
+    }
+  if (K==0) return 0; // Avoid impossible division
+  vyi = - vyi/K;
+  return vyi;
 }
 
 
