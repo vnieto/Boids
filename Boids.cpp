@@ -225,7 +225,7 @@ bool Boids::Is_obstacle_in_range(int i, int j, float R)
   xj = obstacles[j].Get_x();
   yj = obstacles[j].Get_y();
   if (i==j) return false;
-  if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < 5*R)
+  if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < 20*R)
   {
     return true;
   } else {
@@ -305,7 +305,7 @@ float Boids::v2_y(int i)
 
 float Boids::v3_x(int i)
 {
-  // Collision with preys
+  // Collision with PREYS
   int K = 0; // number of preys j in the CONTACT_RADIUS of the prey i
   double vxi=0;
   for (int j=0; j<N; j++)
@@ -327,14 +327,14 @@ float Boids::v3_x(int i)
     vxi = - vxi/K;
   }
   
-  // Collision with obstacles
+  // Collision with OBSTACLES
   int Obs = 0; // number of obstacles j in the CONTACT_RADIUS of the prey i
   double vxi_O=0;
   for (int j=0; j<Obs; j++)
     {
       if (Is_obstacle_in_range(i,j,preys[i].Get_CONTACT_RADIUS()))
       {
-        //vxi_O = vxi_O + 1/(preys[j].Get_x() - preys[i].Get_x());
+        vxi_O = vxi_O + 1/(obstacles[j].Get_x() - preys[i].Get_x());
         vxi_O = vxi_O + obstacles[j].Get_x() - preys[i].Get_x();
         Obs++;
       }
@@ -348,7 +348,7 @@ float Boids::v3_x(int i)
 
 float Boids::v3_y(int i)
 {
-  // Collision with preys
+  // Collision with PREYS
   int K = 0; // number of preys j in the CONTACT_RADIUS of the prey i
   double vyi=0;
   for (int j=0; j<N; j++)
@@ -365,14 +365,14 @@ if (K!=0)// Avoid impossible division
     vyi = - vyi/K;
   }
   
-  // Collision with obstacles
+  // Collision with OBSTACLES
   int Obs = 0; // number of obstacles j in the CONTACT_RADIUS of the prey i
   double vyi_O=0;
   for (int j=0; j<Obs; j++)
     {
       if (Is_obstacle_in_range(i,j,preys[i].Get_CONTACT_RADIUS()))
       {
-        //vyi_O = vyi_O + 1/(preys[j].Get_x() - preys[i].Get_x());
+        vyi_O = vyi_O + 1/(obstacles[j].Get_x() - preys[i].Get_x());
         vyi_O = vyi_O + obstacles[j].Get_x() - preys[i].Get_x();
         Obs++;
       }
