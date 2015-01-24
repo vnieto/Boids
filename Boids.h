@@ -97,15 +97,16 @@ class Boids
     // =======================================================================
     //                              Protected Methods
     // =======================================================================
-    int change_position_prey(void);
-    int change_velocity_prey(void);
+    int Change_position_prey(void);
+    int Change_velocity_prey(void);
     float v1_x(int i);
     float v2_x(int i);
     float v3_x(int i);
     float v1_y(int i);
     float v2_y(int i);
     float v3_y(int i);
-    bool Is_in_range(int i, int j, float R);
+    bool Is_prey_in_range(int i, int j, float R);
+    bool Is_obstacle_in_range(int i, int j, float R);
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
