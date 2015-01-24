@@ -1,13 +1,13 @@
 
 all: main
 
-main: 	main.o Boids.o Agent.o Prey.o bwindow.o
-	g++ -Wall -o main main.o Boids.o Agent.o Prey.o bwindow.o -g  -lX11 -L/usr/X11R6/lib
+main: 	main.o Boids.o Agent.o Prey.o Obstacle.o bwindow.o
+	g++ -Wall -o main main.o Boids.o Agent.o Prey.o Obstacle.o bwindow.o -g  -lX11 -L/usr/X11R6/lib
 
 main.o: main.cpp
 	g++ -Wall -c main.cpp -o main.o -g
 
-Boids.o:Agent.h Boids.h Boids.cpp bwindow.h
+Boids.o:Agent.h Boids.h Boids.cpp bwindow.h Obstacle.h
 	g++ -Wall -c Boids.cpp -o Boids.o -g
 
 
@@ -20,6 +20,9 @@ Agent.o:Agent.h Agent.cpp
 
 Prey.o:	Agent.h Prey.h Prey.cpp
 	g++ -Wall -c Prey.cpp -o Prey.o -g
+
+Obstacle.o:Obstacle.h Obstacle.cpp
+	g++ -Wall -c Obstacle.cpp -o Obstacle.o -g
 
 
 clean:

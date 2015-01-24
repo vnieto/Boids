@@ -21,6 +21,7 @@
 #include "Boids.h"
 #include "Agent.h"
 #include "Prey.h"
+#include "Obstacle.h"
 // ===========================================================================
 //                         Declare Miscellaneous Functions
 // ===========================================================================
@@ -44,7 +45,7 @@ int main(int argc, char* argv[])
 }
 
 /*
-git add Makefile main.cpp Boids.cpp Boids.h Agent.cpp Agent.h Prey.cpp Prey.h bwindow.cpp bwindow.h
+git add Makefile main.cpp Boids.cpp Boids.h Agent.cpp Agent.h Prey.cpp Prey.h Obstacle.cpp Obstacle.h bwindow.cpp bwindow.h
 */
 
 // ===========================================================================

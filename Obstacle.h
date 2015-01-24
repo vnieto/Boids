@@ -6,8 +6,8 @@
 
 
 
-#ifndef __BOIDS_H__
-#define __BOIDS_H__
+#ifndef __OBSTACLE_H__
+#define __OBSTACLE_H__
 
 
 // ===========================================================================
@@ -21,10 +21,8 @@
 // ===========================================================================
 //                                Project Files
 // ===========================================================================
-#include "Agent.h"
-#include "Prey.h"
-#include "Obstacle.h"
-#include "bwindow.h"
+
+
 
 // ===========================================================================
 //                              Class declarations
@@ -35,7 +33,7 @@
 
 
 
-class Boids
+class Obstacle
 {
   public :
     
@@ -46,18 +44,18 @@ class Boids
     // =======================================================================
     //                               Constructors
     // =======================================================================
-    Boids(void);
-    Boids(int a_N);
-    Boids(int a_N, char R); //Constructor for boid with random vectors
+    Obstacle(void);
+    Obstacle(float a_x, float a_y);
+    
     // =======================================================================
     //                                Destructor
     // =======================================================================
-    virtual ~Boids(void);
+    virtual ~Obstacle(void);
 
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
-
+    
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
@@ -69,7 +67,7 @@ class Boids
     // =======================================================================
     //                              Public Methods
     // =======================================================================
-    int window(void);
+
     // =======================================================================
     //                             Public Attributes
     // =======================================================================
@@ -83,12 +81,12 @@ class Boids
     // =======================================================================
     //                            Forbidden Constructors
     // =======================================================================
-    /*Boids(void)
+    /*Obstacle(void)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
     };*/
-    Boids(const Boids &model)
+    Obstacle(const Obstacle &model)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
@@ -98,25 +96,12 @@ class Boids
     // =======================================================================
     //                              Protected Methods
     // =======================================================================
-    int change_position_prey(void);
-    int change_velocity_prey(void);
-    float v1_x(int i);
-    float v2_x(int i);
-    float v3_x(int i);
-    float v1_y(int i);
-    float v2_y(int i);
-    float v3_y(int i);
-    bool Is_in_range(int i, int j, float R);
+
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
-    Prey * preys;
-    int N;
-    int dt;
-    int t;
-    static const int MAX_X;
-    static const int MAX_Y;
-    static const int MAX_V;
+    float x;
+    float y;
 };
 
 
@@ -137,5 +122,5 @@ class Boids
 // ===========================================================================
 
 
-#endif // __BOIDS_H__
+#endif // __OBSTACLE_H__
 
