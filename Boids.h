@@ -47,8 +47,7 @@ class Boids
     //                               Constructors
     // =======================================================================
     Boids(void);
-    Boids(int a_N);
-    Boids(int a_N, char R); //Constructor for boid with random vectors
+    Boids(int a_N, int a_N_O); //Constructor for boid with random vectors
     // =======================================================================
     //                                Destructor
     // =======================================================================
@@ -112,8 +111,8 @@ class Boids
     // =======================================================================
     Prey * preys;
     int N;
-    int dt;
-    int t;
+    Obstacle * obstacles;
+    int N_O;
     static const int MAX_X;
     static const int MAX_Y;
     static const int MAX_V;

@@ -138,7 +138,6 @@ inline float Prey::Get_x(void) const
 inline float Prey::Get_y(void) const
 {
   return y;
-
 }
 
 inline float Prey::Get_vx(void) const

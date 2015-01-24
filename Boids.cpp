@@ -42,22 +42,22 @@ Boids::Boids(void)
   N = 0;
 }
 
-Boids::Boids(int a_N)
-{ 
-	N = a_N;
-	preys = new Prey[N];
-}
-
-Boids::Boids(int a_N, char R)
+Boids::Boids(int a_N, int a_N_O)
 {
 	N = a_N;
+  N_O = a_N_O;
 	preys = new Prey[N];
+  obstacles = new Obstacle[N_O];
   srand (time(NULL));
-	for (int i=0; i<N; i++)
-	{
-		preys[i] = Prey((rand()%MAX_X+1),(rand()%MAX_Y+1),(rand()%4-2),(rand()%4-2));
-		//printf("preys[%d].x = %lf\n",i,preys[i].Get_x());
-	}
+  for (int i=0; i<N; i++)
+  {
+    preys[i] = Prey((rand()%MAX_X+1),(rand()%MAX_Y+1),(rand()%4-2),(rand()%4-2));
+    //printf("preys[%d].x = %lf\n",i,preys[i].Get_x());
+  }
+  for (int i=0; i<N_O; i++)
+  {
+    obstacles[i] = Obstacle((rand()%MAX_X+1),(rand()%MAX_Y+1));
+  }
 }
 
 
@@ -100,17 +100,22 @@ int Boids::window(void)
 
 
       change_velocity_prey();
+      change_position_prey();
 			// Erase of the boids
-      win.draw_fsquare(0,0,MAX_X,MAX_Y,0xFFFFFF);
+      win.draw_fsquare(0,0,MAX_X,MAX_Y,0x5588FF);
   		/*for(int i = 0; i<N; i++) // Erase of the boids one by one
   			{
   				win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0x00FFFF);
   			}*/
-  		change_position_prey();
+      // Drawing of the obstacles
+      for(int i = 0; i<N_O; i++)
+        {
+          win.draw_fsquare((obstacles[i].Get_x()-5),(obstacles[i].Get_y()-5),(obstacles[i].Get_x()+5),(obstacles[i].Get_y()+5),0x777777);
+        }
 			// Drawing of the boids
   		for(int i = 0; i<N; i++)
   			{
-  				win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0xFF0000);
+  				win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0x000000);
   			}
   		
 

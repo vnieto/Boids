@@ -30,13 +30,13 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const float Prey::G1 = 0.001;
+const float Prey::G1 = 0.0005;
 const float Prey::G2 = 0.0005;
 //const float Prey::G3 = 0.0005;
 const float Prey::G3 = 0.05;
-const float Prey::PERCEPTION_RADIUS=80;
+const float Prey::PERCEPTION_RADIUS=120;
 //const float Prey::CONTACT_RADIUS=5;
-const float Prey::CONTACT_RADIUS=8;
+const float Prey::CONTACT_RADIUS=5;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
