@@ -32,7 +32,7 @@
 // ===========================================================================
 const int Boids::MAX_X = 800;
 const int Boids::MAX_Y = 600;
-const int Boids::MAX_V = 2000;
+const int Boids::MAX_V = 200;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -55,7 +55,7 @@ Boids::Boids(int a_N, char R)
 	for (int i=0; i<N; i++)
 	{
 		preys[i] = Prey((rand()%MAX_X+1),(rand()%MAX_Y+1),(rand()%4-2),(rand()%4-2));
-		printf("preys[%d].x = %d\n",i,preys[i].Get_x());
+		printf("preys[%d].x = %lf\n",i,preys[i].Get_x());
 	}
 }
 
@@ -95,15 +95,16 @@ int Boids::window(void)
 			//win.draw_line(100,100,200,200,0xFF0000);
 			//win.draw_text(10,10,0x0,"Hello World",strlen("Hello World"));
 			//win.draw_square(200,200,220,220,0xFF00);
-			//win.draw_fsquare(400,400,440,440,0xFF00FF);
+			//win.draw_fsquare(400,400,410,410,0xFF00FF);
 
+
+      change_velocity_prey();
 			// Erase of the boids
   		for(int i = 0; i<N; i++)
   			{
-  				win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0xFFFF00);
+  				win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0x00FFFF);
   			}
   		change_position_prey();
-  		change_velocity_prey();
 			// Drawing of the boids
   		for(int i = 0; i<N; i++)
   			{
@@ -131,7 +132,7 @@ int Boids::change_position_prey(void)
   					preys[i].Set_vy(-preys[i].Get_vy());
   				}
 
-  				// equation (1)
+  				// equation (1): x(t+dt) = x(t)+ dt*v(t)
   				preys[i].Set_x_next(preys[i].Get_x()+preys[i].Get_vx()/20);
   				preys[i].Set_y_next(preys[i].Get_y()+preys[i].Get_vy()/20);
   			}
@@ -140,8 +141,8 @@ int Boids::change_position_prey(void)
   				// Apply the computed positions
   				preys[i].Set_x(preys[i].Get_x_next());
   				preys[i].Set_y(preys[i].Get_y_next());
-  				printf("preys[%lf].x = %lf\t",i,preys[i].Get_x());
-  				printf("preys[%lf].y = %lf\n",i,preys[i].Get_y());
+  				printf("preys[%d].x = %lf\t",i,preys[i].Get_x());
+  				printf("preys[%d].y = %lf\n",i,preys[i].Get_y());
   			}
 	return 0;
 }
@@ -173,15 +174,33 @@ int Boids::change_velocity_prey(void)
             printf("preys[%d].vx = %lf\t",i,preys[i].Get_vx());
             printf("preys[%d].vy = %lf\n",i,preys[i].Get_vy());
           } else 
-          { // Reduce the speed? /!\ /!\ /!\
-            preys[i].Set_vx(preys[i].Get_vx_next()-1);
-            preys[i].Set_vy(preys[i].Get_vy_next()-1);
-            printf("preys[%d].vx = %lf\t",i,preys[i].Get_vx());
-            printf("preys[%d].vy = %lf\n",i,preys[i].Get_vy());
+          {
+            /* Reduce the speed? /!\ /!\ /!\*/
+            if (preys[i].Get_vx()>0) preys[i].Set_vx(preys[i].Get_vx_next()-1);
+            if (preys[i].Get_vy()>0) preys[i].Set_vy(preys[i].Get_vy_next()-1);
+            if (preys[i].Get_vx()<0) preys[i].Set_vx(preys[i].Get_vx_next()+1);
+            if (preys[i].Get_vy()<0) preys[i].Set_vy(preys[i].Get_vy_next()+1);
           }
 
   			}
 	return 0;
+}
+
+
+bool Boids::testradius(int i, int j)
+{
+  float xi,yi,xj,yj,R;
+  xi = preys[i].Get_x();
+  yi = preys[i].Get_y();
+  xj = preys[j].Get_x();
+  yj = preys[j].Get_y();
+  R = preys[i].Get_PERCEPTION_RADIUS();
+  if( sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < R)
+  {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 
@@ -190,8 +209,11 @@ int Boids::v1(int i)
   double vxi, vyi;
   for (int j=0; j<N; j++)
     {
+      if (testradius(i,j))
+      {
       vxi = vxi + preys[j].Get_vx() - preys[i].Get_vx();
       vyi = vyi + preys[j].Get_vy() - preys[i].Get_vy();
+      }
     }
   vxi = vxi/N;
   vyi = vyi/N;

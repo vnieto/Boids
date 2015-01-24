@@ -64,6 +64,8 @@ class Prey : public Agent
     inline float Get_y_next(void) const;
     inline float Get_vx_next(void) const;
     inline float Get_vy_next(void) const;
+    inline float Get_PERCEPTION_RADIUS(void) const;
+    inline float Get_CONTACT_RADIUS(void) const;
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
@@ -114,9 +116,11 @@ class Prey : public Agent
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
-    static const double G1;
-    static const double G2;
-    static const double G3;
+    static const float G1;
+    static const float G2;
+    static const float G3;
+    static const float PERCEPTION_RADIUS;
+    static const float CONTACT_RADIUS;
 };
 
 
@@ -163,6 +167,16 @@ inline float Prey::Get_vx_next(void) const
 inline float Prey::Get_vy_next(void) const
 {
   return vy_next;
+}
+
+inline float Prey::Get_PERCEPTION_RADIUS(void) const
+{
+  return PERCEPTION_RADIUS;
+}
+
+inline float Prey::Get_CONTACT_RADIUS(void) const
+{
+  return CONTACT_RADIUS;
 }
 
 // ===========================================================================

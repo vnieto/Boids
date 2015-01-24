@@ -30,9 +30,11 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const double Prey::G1 = 1;
-const double Prey::G2 = 1;
-const double Prey::G3 = 1;
+const float Prey::G1 = 0.1;
+const float Prey::G2 = 0.1;
+const float Prey::G3 = 0.1;
+const float Prey::PERCEPTION_RADIUS=100;
+const float Prey::CONTACT_RADIUS=10;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
