@@ -117,6 +117,8 @@ class Boids
     static const int MAX_X;
     static const int MAX_Y;
     static const int MAX_V;
+    static const float MIN_V;
+    static const float MIN_V_G;
 };
 
 

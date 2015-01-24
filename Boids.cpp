@@ -33,6 +33,8 @@
 const int Boids::MAX_X = 800;
 const int Boids::MAX_Y = 600;
 const int Boids::MAX_V = 100;
+const float Boids::MIN_V = 1.5;
+const float Boids::MIN_V_G = 1.01;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -98,15 +100,16 @@ int Boids::window(void)
 			//win.draw_square(200,200,220,220,0xFF00);
 			//win.draw_fsquare(400,400,410,410,0xFF00FF);
 
+      /*for(int i = 0; i<N; i++) // Erase of the boids one by one
+        {
+          win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0x5588FF);
+        }*/
 
       Change_velocity_prey();
       Change_position_prey();
 			// Erase of the boids
       win.draw_fsquare(0,0,MAX_X,MAX_Y,0x5588FF);
-  		/*for(int i = 0; i<N; i++) // Erase of the boids one by one
-  			{
-  				win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0x00FFFF);
-  			}*/
+  		
       // Drawing of the obstacles
       for(int i = 0; i<N_O; i++)
         {
@@ -170,6 +173,13 @@ int Boids::Change_velocity_prey(void)
   				preys[i].Set_vy_next(preys[i].Get_vy()+(rand()%(range)-range/2));*/
           preys[i].Set_vx_next(preys[i].Get_vx()+(G1*v1_x(i)+G2*v2_x(i)+G3*v3_x(i)));
           preys[i].Set_vy_next(preys[i].Get_vy()+(G1*v1_y(i)+G2*v2_y(i)+G3*v3_y(i)));
+          // Set a mimimun speed
+          if ( sqrt((preys[i].Get_vx_next()*preys[i].Get_vy_next())*(preys[i].Get_vx_next()*preys[i].Get_vy_next()))<MIN_V)
+          {
+            preys[i].Set_vx_next(preys[i].Get_vx_next()*MIN_V_G);
+            preys[i].Set_vy_next(preys[i].Get_vy_next()*MIN_V_G);
+          }
+
   			}
 	for(int i = 0; i<N; i++)
   			{/*
@@ -225,7 +235,7 @@ bool Boids::Is_obstacle_in_range(int i, int j, float R)
   xj = obstacles[j].Get_x();
   yj = obstacles[j].Get_y();
   if (i==j) return false;
-  if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < 20*R)
+  if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < obstacles[0].Get_G_OBS()*R)
   {
     return true;
   } else {
@@ -330,7 +340,7 @@ float Boids::v3_x(int i)
   // Collision with OBSTACLES
   int Obs = 0; // number of obstacles j in the CONTACT_RADIUS of the prey i
   double vxi_O=0;
-  for (int j=0; j<Obs; j++)
+  for (int j=0; j<N_O; j++)
     {
       if (Is_obstacle_in_range(i,j,preys[i].Get_CONTACT_RADIUS()))
       {
@@ -341,7 +351,7 @@ float Boids::v3_x(int i)
     }
   if (Obs!=0)// Avoid impossible division
   {
-    vxi = vxi - obstacles[0].Get_G_OBS()*vxi_O/Obs;
+    vxi = vxi - vxi_O/Obs;
   }
   return vxi;
 }
@@ -368,7 +378,7 @@ if (K!=0)// Avoid impossible division
   // Collision with OBSTACLES
   int Obs = 0; // number of obstacles j in the CONTACT_RADIUS of the prey i
   double vyi_O=0;
-  for (int j=0; j<Obs; j++)
+  for (int j=0; j<N_O; j++)
     {
       if (Is_obstacle_in_range(i,j,preys[i].Get_CONTACT_RADIUS()))
       {
@@ -379,7 +389,7 @@ if (K!=0)// Avoid impossible division
     }
   if (Obs!=0)// Avoid impossible division
   {
-    vyi = vyi - obstacles[0].Get_G_OBS()*vyi_O/Obs;
+    vyi = vyi - vyi_O/Obs;
   }
   return vyi;
 }
