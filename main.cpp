@@ -43,14 +43,15 @@ int main(int argc, char* argv[])
   printf("p4.x=%lf\tp4.y=%lf\tp4.vx=%lf\tp4.vy=%lf\n",
     p4.Get_x(),p4.Get_y(),p4.Get_vx(),p4.Get_vy());
 
-
   Boids b(12,'r');
   b.window();
   printf("Successfully compilated.\n");
   return 0;
 }
 
-
+/*
+git add Makefile main.cpp Boids.cpp Boids.h Agent.cpp Agent.h Prey.cpp Prey.h bwindow.cpp bwindow.h
+*/
 
 // ===========================================================================
 //                         Define Miscellaneous Functions

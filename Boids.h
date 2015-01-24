@@ -99,8 +99,9 @@ class Boids
     // =======================================================================
     int change_position_prey(void);
     int change_velocity_prey(void);
-    double v1(int i);
-    //double v2(int i);
+    int v1(int i);
+    int v2(int i);
+    int v3(int i);
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
@@ -110,6 +111,7 @@ class Boids
     int t;
     static const int MAX_X;
     static const int MAX_Y;
+    static const int MAX_V;
 };
 
 
