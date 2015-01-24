@@ -52,6 +52,7 @@ Boids::Boids(int a_N, char R)
 {
 	N = a_N;
 	preys = new Prey[N];
+  srand (time(NULL));
 	for (int i=0; i<N; i++)
 	{
 		preys[i] = Prey((rand()%MAX_X+1),(rand()%MAX_Y+1),(rand()%4-2),(rand()%4-2));
@@ -100,10 +101,11 @@ int Boids::window(void)
 
       change_velocity_prey();
 			// Erase of the boids
-  		for(int i = 0; i<N; i++)
+      win.draw_fsquare(0,0,MAX_X,MAX_Y,0xFFFFFF);
+  		/*for(int i = 0; i<N; i++) // Erase of the boids one by one
   			{
   				win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0x00FFFF);
-  			}
+  			}*/
   		change_position_prey();
 			// Drawing of the boids
   		for(int i = 0; i<N; i++)
