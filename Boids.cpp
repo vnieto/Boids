@@ -78,6 +78,11 @@ Boids::~Boids(void)
 {
 }
 
+
+
+
+
+
 // ===========================================================================
 //                                 Public Methods
 // ===========================================================================
@@ -108,9 +113,10 @@ int Boids::window(void)
 			//win.draw_square(200,200,220,220,0xFF00);
 			//win.draw_fsquare(400,400,410,410,0xFF00FF);
 
-      /*for(int i = 0; i<N; i++) // Erase of the boids one by one
+      /*
+      for(int i = 0; i<N; i++) // Erase of the boids one by one
         {
-          win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0xFFFF00);
+          win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0xFF8800);
         }*/
 
       Change_velocity_prey();
@@ -142,6 +148,11 @@ int Boids::window(void)
     	}
   return 0;
 }
+
+
+
+
+
 // ===========================================================================
 //                                Protected Methods
 // ===========================================================================
@@ -337,6 +348,31 @@ bool Boids::Is_obstacle_in_range(int i, int j, float R)
     return false;
   }
 }
+
+
+int Boids::Closest_prey_in_range(int p, float R)
+{
+  float xp,yp,xj,yj;
+  xp = predators[p].Get_x();
+  yp = predators[p].Get_y();
+  float min_dist = R;
+  float dist;
+  float prey_index=-1;
+  for(int j=0; j<N; j++)
+  {
+    xj = preys[j].Get_x();
+    yj = preys[j].Get_y();
+    dist = sqrt((xp-xj)*(xp-xj)+(yp-yj)*(yp-yj));
+    if(dist < min_dist)
+    {
+      min_dist = dist;
+      prey_index = j;
+    }
+  }
+  return prey_index;
+}
+
+
 
 
 float Boids::v1_x(int i)

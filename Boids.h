@@ -113,6 +113,7 @@ class Boids
     bool Is_prey_in_range(int i, int j, float R);
     bool Is_predator_in_range(int i, int j, float R);
     bool Is_obstacle_in_range(int i, int j, float R);
+    int Closest_prey_in_range(int i, float R);
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================

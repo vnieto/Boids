@@ -30,10 +30,10 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const float Prey::G1 = 0.0005; // Lining up velocities
-const float Prey::G2 = 0.0005; // Heading towards the center of the group
-const float Prey::G3 = 0.05; // Avoiding collision with preys
-const float Prey::G4 = 0.025; // Fleeing predators
+const float Prey::G1 = 0.0005; // Lining up velocities 0.0005
+const float Prey::G2 = 0.00075; // Heading towards the center of the group 0.00075
+const float Prey::G3 = 0.05; // Avoiding collision with preys 0.05
+const float Prey::G4 = 0.025; // Fleeing predators 0.025
 const float Prey::PERCEPTION_RADIUS=120;
 const float Prey::CONTACT_RADIUS=5;
 // ===========================================================================
