@@ -47,7 +47,7 @@ class Prey : public Agent
     Prey(void);
     Prey(float a_x, float a_y);
     Prey(float a_x, float a_y, float a_vx, float a_vy);
-    //Prey(float a_x, float a_y, float a_vx, float a_vy, float a_r, float a_c);
+    
     // =======================================================================
     //                                Destructor
     // =======================================================================

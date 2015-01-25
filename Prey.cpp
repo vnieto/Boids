@@ -46,8 +46,6 @@ Prey::Prey(void)
   y = 0;
   vx = 0;
   vy = 0;
-  //radius = R_DEFAULT;
-  //contact = C_DEFAULT;
 }
 
 Prey::Prey(float a_x, float a_y)
@@ -56,8 +54,6 @@ Prey::Prey(float a_x, float a_y)
   y = a_y;
   vx = 0;
   vy = 0;
-  //radius = R_DEFAULT;
-  //contact = C_DEFAULT;
 }
 
 Prey::Prey(float a_x, float a_y, float a_vx, float a_vy)
@@ -66,19 +62,7 @@ Prey::Prey(float a_x, float a_y, float a_vx, float a_vy)
   y = a_y;
   vx = a_vx;
   vy = a_vy;
-  //radius = R_DEFAULT;
-  //contact = C_DEFAULT;
 }
-/*
-Prey::Prey(float a_x, float a_y, float a_vx, float a_vy, float a_r, float a_c)
-{
-  x = a_x;
-  y = a_y;
-  vx = a_vx;
-  vy = a_vy;
-  radius = a_r;
-  contact = a_c;
-}*/
 
 // ===========================================================================
 //                                  Destructor
