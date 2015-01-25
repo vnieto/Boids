@@ -16,27 +16,27 @@
 // ===========================================================================
 //                                 Project Files
 // ===========================================================================
-#include "Predatory.h"
+#include "Predator.h"
 
 
 
 
 //############################################################################
 //                                                                           #
-//                           Class Predatory                                      #
+//                           Class Predator                                      #
 //                                                                           #
 //############################################################################
 
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const float Predatory::GP = 0.0005;
-const float Predatory::PERCEPTION_RADIUS_P=120;
-const float Predatory::CONTACT_RADIUS_P=5;
+const float Predator::GP = 0.0005;
+const float Predator::PERCEPTION_RADIUS_P=120;
+const float Predator::CONTACT_RADIUS_P=5;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
-Predatory::Predatory(void)
+Predator::Predator(void)
 {
   x = 0;
   y = 0;
@@ -44,7 +44,7 @@ Predatory::Predatory(void)
   vy = 0;
 }
 
-Predatory::Predatory(float a_x, float a_y)
+Predator::Predator(float a_x, float a_y)
 {
   x = a_x;
   y = a_y;
@@ -52,7 +52,7 @@ Predatory::Predatory(float a_x, float a_y)
   vy = 0;
 }
 
-Predatory::Predatory(float a_x, float a_y, float a_vx, float a_vy)
+Predator::Predator(float a_x, float a_y, float a_vx, float a_vy)
 {
   x = a_x;
   y = a_y;
@@ -63,7 +63,7 @@ Predatory::Predatory(float a_x, float a_y, float a_vx, float a_vy)
 // ===========================================================================
 //                                  Destructor
 // ===========================================================================
-Predatory::~Predatory(void)
+Predator::~Predator(void)
 {
 }
 

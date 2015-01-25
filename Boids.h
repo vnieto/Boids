@@ -23,7 +23,7 @@
 // ===========================================================================
 #include "Agent.h"
 #include "Prey.h"
-#include "Predatory.h"
+#include "Predator.h"
 #include "Obstacle.h"
 #include "bwindow.h"
 
@@ -113,6 +113,8 @@ class Boids
     // =======================================================================
     Prey * preys;
     int N;
+    Predator * predators;
+    int N_P;
     Obstacle * obstacles;
     int N_O;
     static const int MAX_X;

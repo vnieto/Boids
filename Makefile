@@ -1,8 +1,8 @@
 
 all: main
 
-main: 	main.o Boids.o Agent.o Prey.o Predatory.o Obstacle.o bwindow.o
-	g++ -Wall -o main main.o Boids.o Agent.o Prey.o Predatory.o Obstacle.o bwindow.o -g  -lX11 -L/usr/X11R6/lib
+main: 	main.o Boids.o Agent.o Prey.o Predator.o Obstacle.o bwindow.o
+	g++ -Wall -o main main.o Boids.o Agent.o Prey.o Predator.o Obstacle.o bwindow.o -g  -lX11 -L/usr/X11R6/lib
 
 main.o: main.cpp
 	g++ -Wall -c main.cpp -o main.o -g
@@ -21,8 +21,8 @@ Agent.o:Agent.h Agent.cpp
 Prey.o:	Agent.h Prey.h Prey.cpp
 	g++ -Wall -c Prey.cpp -o Prey.o -g
 
-Predatory.o:	Agent.h Predatory.h Predatory.cpp
-	g++ -Wall -c Predatory.cpp -o Predatory.o -g
+Predator.o:	Agent.h Predator.h Predator.cpp
+	g++ -Wall -c Predator.cpp -o Predator.o -g
 
 Obstacle.o:Obstacle.h Obstacle.cpp
 	g++ -Wall -c Obstacle.cpp -o Obstacle.o -g

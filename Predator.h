@@ -6,8 +6,8 @@
 
 
 
-#ifndef __PREDATORY_H__
-#define __PREDATORY_H__
+#ifndef __PREDATOR_H__
+#define __PREDATOR_H__
 
 
 // ===========================================================================
@@ -33,7 +33,7 @@
 
 
 
-class Predatory : public Agent
+class Predator : public Agent
 {
   public :
     
@@ -44,14 +44,14 @@ class Predatory : public Agent
     // =======================================================================
     //                               Constructors
     // =======================================================================
-    Predatory(void);
-    Predatory(float a_x, float a_y);
-    Predatory(float a_x, float a_y, float a_vx, float a_vy);
+    Predator(void);
+    Predator(float a_x, float a_y);
+    Predator(float a_x, float a_y, float a_vx, float a_vy);
     
     // =======================================================================
     //                                Destructor
     // =======================================================================
-    virtual ~Predatory(void);
+    virtual ~Predator(void);
 
     // =======================================================================
     //                            Accessors: getters
@@ -98,12 +98,12 @@ class Predatory : public Agent
     // =======================================================================
     //                            Forbidden Constructors
     // =======================================================================
-    /*Predatory(void)
+    /*Predator(void)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
     };*/
-    Predatory(const Predatory &model)
+    Predator(const Predator &model)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
@@ -126,58 +126,58 @@ class Predatory : public Agent
 // ===========================================================================
 //                              Getters' definitions
 // ===========================================================================
-inline float Predatory::Get_x(void) const
+inline float Predator::Get_x(void) const
 {
   return x;
 }
 
-inline float Predatory::Get_y(void) const
+inline float Predator::Get_y(void) const
 {
   return y;
 }
 
-inline float Predatory::Get_vx(void) const
+inline float Predator::Get_vx(void) const
 {
   return vx;
 }
 
-inline float Predatory::Get_vy(void) const
+inline float Predator::Get_vy(void) const
 {
   return vy;
 }
 
-inline float Predatory::Get_x_next(void) const
+inline float Predator::Get_x_next(void) const
 {
   return x_next;
 }
 
-inline float Predatory::Get_y_next(void) const
+inline float Predator::Get_y_next(void) const
 {
   return y_next;
 
 }
 
-inline float Predatory::Get_vx_next(void) const
+inline float Predator::Get_vx_next(void) const
 {
   return vx_next;
 }
 
-inline float Predatory::Get_vy_next(void) const
+inline float Predator::Get_vy_next(void) const
 {
   return vy_next;
 }
 
-inline float Predatory::Get_GP(void) const
+inline float Predator::Get_GP(void) const
 {
   return GP;
 }
 
-inline float Predatory::Get_PERCEPTION_RADIUS_P(void) const
+inline float Predator::Get_PERCEPTION_RADIUS_P(void) const
 {
   return PERCEPTION_RADIUS_P;
 }
 
-inline float Predatory::Get_CONTACT_RADIUS_P(void) const
+inline float Predator::Get_CONTACT_RADIUS_P(void) const
 {
   return CONTACT_RADIUS_P;
 }
@@ -185,42 +185,42 @@ inline float Predatory::Get_CONTACT_RADIUS_P(void) const
 // ===========================================================================
 //                              Setters' definitions
 // ===========================================================================
-inline void Predatory::Set_x_next(float a_x)
+inline void Predator::Set_x_next(float a_x)
 {
   x_next = a_x;
 }
 
-inline void Predatory::Set_y_next(float a_y)
+inline void Predator::Set_y_next(float a_y)
 {
   y_next = a_y;
 }
 
-inline void Predatory::Set_vx_next(float a_vx)
+inline void Predator::Set_vx_next(float a_vx)
 {
   vx_next = a_vx;
 }
 
-inline void Predatory::Set_vy_next(float a_vy)
+inline void Predator::Set_vy_next(float a_vy)
 {
   vy_next = a_vy;
 }
 
-inline void Predatory::Set_x(float a_x)
+inline void Predator::Set_x(float a_x)
 {
   x = a_x;
 }
 
-inline void Predatory::Set_y(float a_y)
+inline void Predator::Set_y(float a_y)
 {
   y = a_y;
 }
 
-inline void Predatory::Set_vx(float a_vx)
+inline void Predator::Set_vx(float a_vx)
 {
   vx = a_vx;
 }
 
-inline void Predatory::Set_vy(float a_vy)
+inline void Predator::Set_vy(float a_vy)
 {
   vy = a_vy;
 }
@@ -234,5 +234,5 @@ inline void Predatory::Set_vy(float a_vy)
 // ===========================================================================
 
 
-#endif // __PREDATORY_H__
+#endif // __PREDATOR_H__
 
