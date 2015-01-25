@@ -34,9 +34,9 @@ const float Boids::DT = 0.05;
 const float Boids::DT_P = 0.07;
 const int Boids::MAX_X = 800;
 const int Boids::MAX_Y = 600;
-const int Boids::EDGE = 10;
-const int Boids::MAX_V = 15;
-const int Boids::MAX_V_P = 20;
+const int Boids::EDGE = 5;
+const int Boids::MAX_V = 9;
+const int Boids::MAX_V_P = 10;
 const float Boids::MIN_V = 1.25;
 const float Boids::MIN_V_G = 1.01;
 // ===========================================================================
@@ -161,16 +161,6 @@ int Boids::Change_position_prey(void)
 {
 	for(int i = 0; i<N; i++)
   			{
-  				// Forbide the boids to leave the window
-  				if (preys[i].Get_x()<0 || preys[i].Get_x()>MAX_X)
-  				{
-  					preys[i].Set_vx(-preys[i].Get_vx());
-  				}
-					if (preys[i].Get_y()<0 || preys[i].Get_y()>MAX_Y)
-  				{
-  					preys[i].Set_vy(-preys[i].Get_vy());
-  				}
-
   				// equation (1): x(t+dt) = x(t)+ dt*v(t)
   				preys[i].Set_x_next(preys[i].Get_x()+preys[i].Get_vx()*DT);
   				preys[i].Set_y_next(preys[i].Get_y()+preys[i].Get_vy()*DT);
@@ -182,6 +172,25 @@ int Boids::Change_position_prey(void)
   				preys[i].Set_y(preys[i].Get_y_next());/*
   				printf("preys[%d].x = %lf\t",i,preys[i].Get_x());
   				printf("preys[%d].y = %lf\n",i,preys[i].Get_y());*/
+                    // Forbide the boids to leave the window
+          if (preys[i].Get_x()<EDGE)
+          {
+            preys[i].Set_x(EDGE);
+            preys[i].Set_vx(abs(preys[i].Get_vx()));
+          } else if (preys[i].Get_x()>MAX_X-EDGE)
+          {
+            preys[i].Set_x(MAX_X-EDGE);
+            preys[i].Set_vx(-abs(preys[i].Get_vx()));
+          }
+          if (preys[i].Get_y()<EDGE)
+          {
+            preys[i].Set_y(EDGE);
+            preys[i].Set_vy(abs(preys[i].Get_vy()));
+          } else if (preys[i].Get_y()>MAX_Y-EDGE)
+          {
+            preys[i].Set_y(MAX_Y-EDGE);
+            preys[i].Set_vy(-abs(preys[i].Get_vy()));
+          }
   			}
 	return 0;
 }
@@ -299,11 +308,8 @@ int Boids::Change_velocity_predator(void)
           } else 
           {
             // Reduce the velocity
-            predators[i].Set_vx(predators[i].Get_vx_next()/v_next);
-            predators[i].Set_vy(predators[i].Get_vy_next()/v_next);
-          printf("cv1predators[%d].v_n = %lf\t",i,v_next);
-          printf("cv1predators[%d].vx_n = %lf\t",i,predators[i].Get_vx_next());
-          printf("cv1predators[%d].vy_n = %lf\n",i,predators[i].Get_vy_next());
+            predators[i].Set_vx((predators[i].Get_vx_next()/v_next)*MAX_V_P);
+            predators[i].Set_vy((predators[i].Get_vy_next()/v_next)*MAX_V_P);
           }
         }
   return 0;
