@@ -47,6 +47,14 @@ int main(int argc, char* argv[])
 
 /*
 git add Makefile main.cpp Boids.cpp Boids.h Agent.cpp Agent.h Prey.cpp Prey.h Predator.cpp Predator.h Obstacle.cpp Obstacle.h bwindow.cpp bwindow.h
+
+TO DO LIST
+isotropic changes of velocity
+add a Is_alive bool to preys
+	take off dead preys to all loops
+add a Is_mobile bool to predatory
+	when (Is_mobile == false) use system time
+	at the end, add a new predator
 */
 
 // ===========================================================================
