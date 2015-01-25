@@ -129,6 +129,7 @@ class Boids
     static const float DT_P;
     static const int MAX_X;
     static const int MAX_Y;
+    static const int EDGE;
     static const int MAX_V;
     static const int MAX_V_P;
     static const float MIN_V;
