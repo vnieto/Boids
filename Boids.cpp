@@ -194,10 +194,7 @@ int Boids::Change_velocity_prey(void)
   float G3 = preys[0].Get_G3();
   float G4 = preys[0].Get_G4();
 	for(int i = 0; i<N; i++)
-  			{/*
-  				int range = 3; // range of random change
-  				preys[i].Set_vx_next(preys[i].Get_vx()+(rand()%(range)-range/2));
-  				preys[i].Set_vy_next(preys[i].Get_vy()+(rand()%(range)-range/2));*/
+  			{
           preys[i].Set_vx_next(preys[i].Get_vx()+(G1*v1_x(i)+G2*v2_x(i)+G3*v3_x(i)+G4*v4_x(i)));
           preys[i].Set_vy_next(preys[i].Get_vy()+(G1*v1_y(i)+G2*v2_y(i)+G3*v3_y(i)+G4*v4_y(i)));
           // Set a mimimun speed
@@ -227,10 +224,8 @@ int Boids::Change_velocity_prey(void)
           } else 
           {
             /* Reduce the speed? /!\ /!\ /!\*/
-            if (preys[i].Get_vx()>0) preys[i].Set_vx(preys[i].Get_vx_next()-1);
-            if (preys[i].Get_vy()>0) preys[i].Set_vy(preys[i].Get_vy_next()-1);
-            if (preys[i].Get_vx()<0) preys[i].Set_vx(preys[i].Get_vx_next()+1);
-            if (preys[i].Get_vy()<0) preys[i].Set_vy(preys[i].Get_vy_next()+1);
+            preys[i].Set_vx(preys[i].Get_vx_next()*0.9);
+            preys[i].Set_vy(preys[i].Get_vy_next()*0.9);
           }
   			}
 	return 0;
@@ -268,24 +263,23 @@ int Boids::Change_position_predator(void)
 
 int Boids::Change_velocity_predator(void)
 {
-    for(int i = 0; i<N_P; i++)
-        {
-          int range = 3; // range of random change
-          predators[i].Set_vx_next(predators[i].Get_vx()+(rand()%(range)-range/2));
-          predators[i].Set_vy_next(predators[i].Get_vy()+(rand()%(range)-range/2));
-          // Set a mimimun speed
-          if ( sqrt((predators[i].Get_vx_next()*predators[i].Get_vy_next())*(predators[i].Get_vx_next()*predators[i].Get_vy_next()))<MIN_V)
-          {
-            predators[i].Set_vx_next(predators[i].Get_vx_next()*MIN_V_G);
-            predators[i].Set_vy_next(predators[i].Get_vy_next()*MIN_V_G);
-          }
-
-        }
+  int prey_index;
   for(int i = 0; i<N_P; i++)
+      {
+        prey_index = Closest_prey_in_range(i, predators[i].Get_PERCEPTION_RADIUS_P());
+        predators[i].Set_vx_next(predators[i].Get_vx()+v1_p_x(i,prey_index));
+        predators[i].Set_vy_next(predators[i].Get_vy()+v1_p_y(i,prey_index));
+        // Set a mimimun speed
+        if ( sqrt((predators[i].Get_vx_next()*predators[i].Get_vy_next())*(predators[i].Get_vx_next()*predators[i].Get_vy_next()))<MIN_V)
         {
-          // Forbide the boids to go too fast
-          if (sqrt(predators[i].Get_vx()*predators[i].Get_vx()+
-              predators[i].Get_vy()*predators[i].Get_vy()<MAX_V))
+          predators[i].Set_vx_next(predators[i].Get_vx_next()*MIN_V_G);
+          predators[i].Set_vy_next(predators[i].Get_vy_next()*MIN_V_G);
+        }
+      }
+  for(int i = 0; i<N_P; i++)
+      {
+        // Forbide the boids to go too fast
+        if (sqrt(predators[i].Get_vx()*predators[i].Get_vx()+predators[i].Get_vy()*predators[i].Get_vy()<MAX_V))
           {
             // Apply the computed velocities
             predators[i].Set_vx(predators[i].Get_vx_next());
@@ -563,6 +557,48 @@ float Boids::v4_y(int i)
   return vyi;
   return 0;
 }
+
+
+
+float Boids::v1_p_x(int i, int prey_index)
+{
+  double vxi=0;
+  float dist=0;
+  float distx=0;
+  float disty=0;
+  if (prey_index < 0) // Random movement
+  {
+    int range = 3; // range of random change
+    vxi = (rand()%(range)-range/2);
+  } else {
+    distx = (preys[prey_index].Get_x() - predators[i].Get_x());
+    disty = (preys[prey_index].Get_y() - predators[i].Get_y());
+    dist = sqrt(distx*distx+disty*distx);
+    vxi = (distx/(dist+0.001))*predators[i].Get_VP();
+  }
+  return vxi;
+}
+
+float Boids::v1_p_y(int i, int prey_index)
+{
+  double vyi=0;
+  float dist=0;
+  float distx=0;
+  float disty=0;
+  if (prey_index < 0) // Random movement
+  {
+    int range = 3; // range of random change
+    vyi = (rand()%(range)-range/2);
+  } else {
+    distx = (preys[prey_index].Get_x() - predators[i].Get_x());
+    disty = (preys[prey_index].Get_y() - predators[i].Get_y());
+    dist = sqrt(distx*distx+disty*distx);
+    vyi = (disty/(dist+0.001))*predators[i].Get_VP();
+  }
+  return vyi;
+}
+
+
 // ===========================================================================
 //                               Non inline accessors
 // ===========================================================================

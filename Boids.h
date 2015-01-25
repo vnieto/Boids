@@ -110,6 +110,8 @@ class Boids
     float v2_y(int i);
     float v3_y(int i);
     float v4_y(int i);
+    float v1_p_x(int i, int prey_index);
+    float v1_p_y(int i, int prey_index);
     bool Is_prey_in_range(int i, int j, float R);
     bool Is_predator_in_range(int i, int j, float R);
     bool Is_obstacle_in_range(int i, int j, float R);

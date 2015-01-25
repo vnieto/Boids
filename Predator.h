@@ -65,6 +65,7 @@ class Predator : public Agent
     inline float Get_vx_next(void) const;
     inline float Get_vy_next(void) const;
     inline float Get_GP(void) const;
+    inline float Get_VP(void) const;
     inline float Get_PERCEPTION_RADIUS_P(void) const;
     inline float Get_CONTACT_RADIUS_P(void) const;
     // =======================================================================
@@ -118,6 +119,7 @@ class Predator : public Agent
     //                             Protected Attributes
     // =======================================================================
     static const float GP;
+    static const float VP;
     static const float PERCEPTION_RADIUS_P;
     static const float CONTACT_RADIUS_P;
 };
@@ -170,6 +172,11 @@ inline float Predator::Get_vy_next(void) const
 inline float Predator::Get_GP(void) const
 {
   return GP;
+}
+
+inline float Predator::Get_VP(void) const
+{
+  return VP;
 }
 
 inline float Predator::Get_PERCEPTION_RADIUS_P(void) const
