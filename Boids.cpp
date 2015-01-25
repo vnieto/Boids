@@ -176,13 +176,14 @@ int Boids::Change_velocity_prey(void)
   float G1 = preys[0].Get_G1();
   float G2 = preys[0].Get_G2();
   float G3 = preys[0].Get_G3();
+  float G4 = preys[0].Get_G4();
 	for(int i = 0; i<N; i++)
   			{/*
   				int range = 3; // range of random change
   				preys[i].Set_vx_next(preys[i].Get_vx()+(rand()%(range)-range/2));
   				preys[i].Set_vy_next(preys[i].Get_vy()+(rand()%(range)-range/2));*/
-          preys[i].Set_vx_next(preys[i].Get_vx()+(G1*v1_x(i)+G2*v2_x(i)+G3*v3_x(i)));
-          preys[i].Set_vy_next(preys[i].Get_vy()+(G1*v1_y(i)+G2*v2_y(i)+G3*v3_y(i)));
+          preys[i].Set_vx_next(preys[i].Get_vx()+(G1*v1_x(i)+G2*v2_x(i)+G3*v3_x(i)/*+G4*v4_x(i)*/));
+          preys[i].Set_vy_next(preys[i].Get_vy()+(G1*v1_y(i)+G2*v2_y(i)+G3*v3_y(i)/*+G4*v4_y(i)*/));
           // Set a mimimun speed
           if ( sqrt((preys[i].Get_vx_next()*preys[i].Get_vy_next())*(preys[i].Get_vx_next()*preys[i].Get_vy_next()))<MIN_V)
           {
@@ -244,7 +245,6 @@ bool Boids::Is_predator_in_range(int i, int j, float R)
   yi = preys[i].Get_y();
   xj = predators[j].Get_x();
   yj = predators[j].Get_y();
-  if (i==j) return false;
   if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < R)
   {
     return true;
@@ -260,7 +260,6 @@ bool Boids::Is_obstacle_in_range(int i, int j, float R)
   yi = preys[i].Get_y();
   xj = obstacles[j].Get_x();
   yj = obstacles[j].Get_y();
-  if (i==j) return false;
   if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < obstacles[0].Get_G_OBS()*R)
   {
     return true;
@@ -430,8 +429,8 @@ float Boids::v4_x(int i)
     {
       if (Is_predator_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
-        dist = (vxi + predators[j].Get_x() - preys[i].Get_x());
-        vxi = dist/abs(dist);
+        dist = (predators[j].Get_x() - preys[i].Get_x());
+        vxi = vxi + dist/abs(dist);
         P++;
       }
     }
@@ -448,8 +447,8 @@ float Boids::v4_y(int i)
     {
       if (Is_predator_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
-        dist = (vyi + predators[j].Get_y() - preys[i].Get_y());
-        vyi = dist/abs(dist);
+        dist = (predators[j].Get_y() - preys[i].Get_y());
+        vyi = vyi + dist/abs(dist);
         P++;
       }
     }

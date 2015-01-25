@@ -39,7 +39,7 @@
 int main(int argc, char* argv[])
 {
 
-  Boids b(100,1,10);
+  Boids b(100,3,10);
   b.window();
   printf("Successfully compilated.\n");
   return 0;
