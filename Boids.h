@@ -48,7 +48,7 @@ class Boids
     //                               Constructors
     // =======================================================================
     Boids(void);
-    Boids(int a_N, int a_N_O); //Constructor for boid with random vectors
+    Boids(int a_N, int a_N_P, int a_N_O); //Constructor for boids with random vectors
     // =======================================================================
     //                                Destructor
     // =======================================================================
