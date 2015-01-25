@@ -48,7 +48,7 @@ class Agent
     Agent(void);
     Agent(float a_x, float a_y);
     Agent(float a_x, float a_y, float a_vx, float a_vy);
-    Agent(float a_x, float a_y, float a_vx, float a_vy, float a_r, float a_c);
+    //Agent(float a_x, float a_y, float a_vx, float a_vy, float a_r, float a_c);
 
     // =======================================================================
     //                                Destructor
@@ -125,10 +125,10 @@ class Agent
     float y_next;
     float vx_next;
     float vy_next;
-    float radius;
-    float contact;
-    static const float R_DEFAULT;
-    static const float C_DEFAULT;
+    //float radius;
+    //float contact;
+    //static const float R_DEFAULT;
+    //static const float C_DEFAULT;
 };
 
 

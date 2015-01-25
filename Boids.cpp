@@ -102,7 +102,7 @@ int Boids::window(void)
 
       /*for(int i = 0; i<N; i++) // Erase of the boids one by one
         {
-          win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0x5588FF);
+          win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0xFF0000);
         }*/
 
       Change_velocity_prey();
