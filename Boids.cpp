@@ -425,32 +425,36 @@ float Boids::v4_x(int i)
 {
   int P = 0; // number of predators j in the PERCEPTION_RADIUS of the prey i
   double vxi=0;
+  float dist;
   for (int j=0; j<N_P; j++)
     {
-      if (Is_prey_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
+      if (Is_predator_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
-        vxi = vxi + predators[j].Get_x() - preys[i].Get_x();
+        dist = (vxi + predators[j].Get_x() - preys[i].Get_x());
+        vxi = dist/abs(dist);
         P++;
       }
     }
   if (P==0) return 0; // Avoid impossible division
-  vxi = vxi/P;
+  vxi = - vxi/P;
   return vxi;
 }
 float Boids::v4_y(int i)
 {
   int P = 0; // number of predators j in the PERCEPTION_RADIUS of the prey i
   double vyi=0;
+  float dist;
   for (int j=0; j<N_P; j++)
     {
-      if (Is_prey_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
+      if (Is_predator_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
-        vyi = vyi + predators[j].Get_y() - preys[i].Get_y();
+        dist = (vyi + predators[j].Get_y() - preys[i].Get_y());
+        vyi = dist/abs(dist);
         P++;
       }
     }
   if (P==0) return 0; // Avoid impossible division
-  vyi = vyi/P;
+  vyi = - vyi/P;
   return vyi;
   return 0;
 }

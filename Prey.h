@@ -47,7 +47,7 @@ class Prey : public Agent
     Prey(void);
     Prey(float a_x, float a_y);
     Prey(float a_x, float a_y, float a_vx, float a_vy);
-    
+
     // =======================================================================
     //                                Destructor
     // =======================================================================
@@ -67,6 +67,7 @@ class Prey : public Agent
     inline float Get_G1(void) const;
     inline float Get_G2(void) const;
     inline float Get_G3(void) const;
+    inline float Get_G4(void) const;
     inline float Get_PERCEPTION_RADIUS(void) const;
     inline float Get_CONTACT_RADIUS(void) const;
     // =======================================================================
@@ -122,6 +123,7 @@ class Prey : public Agent
     static const float G1;
     static const float G2;
     static const float G3;
+    static const float G4;
     static const float PERCEPTION_RADIUS;
     static const float CONTACT_RADIUS;
 };
@@ -184,6 +186,11 @@ inline float Prey::Get_G2(void) const
 inline float Prey::Get_G3(void) const
 {
   return G3;
+}
+
+inline float Prey::Get_G4(void) const
+{
+  return G4;
 }
 
 inline float Prey::Get_PERCEPTION_RADIUS(void) const
