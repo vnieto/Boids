@@ -182,8 +182,8 @@ int Boids::Change_velocity_prey(void)
   				int range = 3; // range of random change
   				preys[i].Set_vx_next(preys[i].Get_vx()+(rand()%(range)-range/2));
   				preys[i].Set_vy_next(preys[i].Get_vy()+(rand()%(range)-range/2));*/
-          preys[i].Set_vx_next(preys[i].Get_vx()+(G1*v1_x(i)+G2*v2_x(i)+G3*v3_x(i)/*+G4*v4_x(i)*/));
-          preys[i].Set_vy_next(preys[i].Get_vy()+(G1*v1_y(i)+G2*v2_y(i)+G3*v3_y(i)/*+G4*v4_y(i)*/));
+          preys[i].Set_vx_next(preys[i].Get_vx()+(G1*v1_x(i)+G2*v2_x(i)+G3*v3_x(i)+G4*v4_x(i)));
+          preys[i].Set_vy_next(preys[i].Get_vy()+(G1*v1_y(i)+G2*v2_y(i)+G3*v3_y(i)+G4*v4_y(i)));
           // Set a mimimun speed
           if ( sqrt((preys[i].Get_vx_next()*preys[i].Get_vy_next())*(preys[i].Get_vx_next()*preys[i].Get_vy_next()))<MIN_V)
           {
@@ -424,13 +424,13 @@ float Boids::v4_x(int i)
 {
   int P = 0; // number of predators j in the PERCEPTION_RADIUS of the prey i
   double vxi=0;
-  float dist;
+  float dist=0;
   for (int j=0; j<N_P; j++)
     {
       if (Is_predator_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
         dist = (predators[j].Get_x() - preys[i].Get_x());
-        vxi = vxi + dist/abs(dist);
+        vxi = vxi + dist/(abs(dist)+0.001); //0.001 Avoid a jump of the prey
         P++;
       }
     }
@@ -442,13 +442,13 @@ float Boids::v4_y(int i)
 {
   int P = 0; // number of predators j in the PERCEPTION_RADIUS of the prey i
   double vyi=0;
-  float dist;
+  float dist=0;
   for (int j=0; j<N_P; j++)
     {
       if (Is_predator_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
         dist = (predators[j].Get_y() - preys[i].Get_y());
-        vyi = vyi + dist/abs(dist);
+        vyi = vyi + dist/(abs(dist)+0.001); //0.001 Avoid a jump of the prey
         P++;
       }
     }
