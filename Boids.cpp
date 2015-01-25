@@ -113,9 +113,9 @@ int Boids::window(void)
       // Drawing of the obstacles
       for(int i = 0; i<N_O; i++)
         {
-          win.draw_fsquare((obstacles[i].Get_x()-6),(obstacles[i].Get_y()-3),(obstacles[i].Get_x()+6),(obstacles[i].Get_y()+3),0x777777);
-          win.draw_fsquare((obstacles[i].Get_x()-3),(obstacles[i].Get_y()-6),(obstacles[i].Get_x()+3),(obstacles[i].Get_y()+6),0x777777);
-          win.draw_fsquare((obstacles[i].Get_x()-5),(obstacles[i].Get_y()-5),(obstacles[i].Get_x()+5),(obstacles[i].Get_y()+5),0x777777);
+          win.draw_fsquare((obstacles[i].Get_x()-6),(obstacles[i].Get_y()-3),(obstacles[i].Get_x()+6),(obstacles[i].Get_y()+3),0x337733);
+          win.draw_fsquare((obstacles[i].Get_x()-3),(obstacles[i].Get_y()-6),(obstacles[i].Get_x()+3),(obstacles[i].Get_y()+6),0x337733);
+          win.draw_fsquare((obstacles[i].Get_x()-5),(obstacles[i].Get_y()-5),(obstacles[i].Get_x()+5),(obstacles[i].Get_y()+5),0x337733);
         }
 			// Drawing of the boids
   		for(int i = 0; i<N; i++)

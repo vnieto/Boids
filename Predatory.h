@@ -6,8 +6,8 @@
 
 
 
-#ifndef __BOIDS_H__
-#define __BOIDS_H__
+#ifndef __PREDATORY_H__
+#define __PREDATORY_H__
 
 
 // ===========================================================================
@@ -17,15 +17,12 @@
 #include <cstdlib>
 
 
-
 // ===========================================================================
 //                                Project Files
 // ===========================================================================
 #include "Agent.h"
-#include "Prey.h"
-#include "Predatory.h"
-#include "Obstacle.h"
-#include "bwindow.h"
+
+
 
 // ===========================================================================
 //                              Class declarations
@@ -36,7 +33,7 @@
 
 
 
-class Boids
+class Predatory : public Agent
 {
   public :
     
@@ -47,21 +44,40 @@ class Boids
     // =======================================================================
     //                               Constructors
     // =======================================================================
-    Boids(void);
-    Boids(int a_N, int a_N_O); //Constructor for boid with random vectors
+    Predatory(void);
+    Predatory(float a_x, float a_y);
+    Predatory(float a_x, float a_y, float a_vx, float a_vy);
+    
     // =======================================================================
     //                                Destructor
     // =======================================================================
-    virtual ~Boids(void);
+    virtual ~Predatory(void);
 
     // =======================================================================
     //                            Accessors: getters
     // =======================================================================
-
+    inline float Get_x(void) const;
+    inline float Get_y(void) const;
+    inline float Get_vx(void) const;
+    inline float Get_vy(void) const;
+    inline float Get_x_next(void) const;
+    inline float Get_y_next(void) const;
+    inline float Get_vx_next(void) const;
+    inline float Get_vy_next(void) const;
+    inline float Get_GP(void) const;
+    inline float Get_PERCEPTION_RADIUS_P(void) const;
+    inline float Get_CONTACT_RADIUS_P(void) const;
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
-
+    inline void Set_x(float a_x);
+    inline void Set_y(float a_y);
+    inline void Set_vx(float a_vx);
+    inline void Set_vy(float a_vy);
+    inline void Set_x_next(float a_x);
+    inline void Set_y_next(float a_y);
+    inline void Set_vx_next(float a_vx);
+    inline void Set_vy_next(float a_vy);
     // =======================================================================
     //                                Operators
     // =======================================================================
@@ -69,11 +85,10 @@ class Boids
     // =======================================================================
     //                              Public Methods
     // =======================================================================
-    int window(void);
+
     // =======================================================================
     //                             Public Attributes
     // =======================================================================
-
 
 
 
@@ -83,12 +98,12 @@ class Boids
     // =======================================================================
     //                            Forbidden Constructors
     // =======================================================================
-    /*Boids(void)
+    /*Predatory(void)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
     };*/
-    Boids(const Boids &model)
+    Predatory(const Predatory &model)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
@@ -98,38 +113,117 @@ class Boids
     // =======================================================================
     //                              Protected Methods
     // =======================================================================
-    int Change_position_prey(void);
-    int Change_velocity_prey(void);
-    float v1_x(int i);
-    float v2_x(int i);
-    float v3_x(int i);
-    float v1_y(int i);
-    float v2_y(int i);
-    float v3_y(int i);
-    bool Is_prey_in_range(int i, int j, float R);
-    bool Is_obstacle_in_range(int i, int j, float R);
+
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
-    Prey * preys;
-    int N;
-    Obstacle * obstacles;
-    int N_O;
-    static const int MAX_X;
-    static const int MAX_Y;
-    static const int MAX_V;
-    static const float MIN_V;
-    static const float MIN_V_G;
+    static const float GP;
+    static const float PERCEPTION_RADIUS_P;
+    static const float CONTACT_RADIUS_P;
 };
 
 
 // ===========================================================================
 //                              Getters' definitions
 // ===========================================================================
+inline float Predatory::Get_x(void) const
+{
+  return x;
+}
+
+inline float Predatory::Get_y(void) const
+{
+  return y;
+}
+
+inline float Predatory::Get_vx(void) const
+{
+  return vx;
+}
+
+inline float Predatory::Get_vy(void) const
+{
+  return vy;
+}
+
+inline float Predatory::Get_x_next(void) const
+{
+  return x_next;
+}
+
+inline float Predatory::Get_y_next(void) const
+{
+  return y_next;
+
+}
+
+inline float Predatory::Get_vx_next(void) const
+{
+  return vx_next;
+}
+
+inline float Predatory::Get_vy_next(void) const
+{
+  return vy_next;
+}
+
+inline float Predatory::Get_GP(void) const
+{
+  return GP;
+}
+
+inline float Predatory::Get_PERCEPTION_RADIUS_P(void) const
+{
+  return PERCEPTION_RADIUS_P;
+}
+
+inline float Predatory::Get_CONTACT_RADIUS_P(void) const
+{
+  return CONTACT_RADIUS_P;
+}
 
 // ===========================================================================
 //                              Setters' definitions
 // ===========================================================================
+inline void Predatory::Set_x_next(float a_x)
+{
+  x_next = a_x;
+}
+
+inline void Predatory::Set_y_next(float a_y)
+{
+  y_next = a_y;
+}
+
+inline void Predatory::Set_vx_next(float a_vx)
+{
+  vx_next = a_vx;
+}
+
+inline void Predatory::Set_vy_next(float a_vy)
+{
+  vy_next = a_vy;
+}
+
+inline void Predatory::Set_x(float a_x)
+{
+  x = a_x;
+}
+
+inline void Predatory::Set_y(float a_y)
+{
+  y = a_y;
+}
+
+inline void Predatory::Set_vx(float a_vx)
+{
+  vx = a_vx;
+}
+
+inline void Predatory::Set_vy(float a_vy)
+{
+  vy = a_vy;
+}
 
 // ===========================================================================
 //                             Operators' definitions
@@ -140,5 +234,5 @@ class Boids
 // ===========================================================================
 
 
-#endif // __BOIDS_H__
+#endif // __PREDATORY_H__
 
