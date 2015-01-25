@@ -33,8 +33,8 @@
 const int Boids::MAX_X = 800;
 const int Boids::MAX_Y = 600;
 const int Boids::MAX_V = 100;
-const float Boids::MIN_V = 1.5;
-const float Boids::MIN_V_G = 1.01;
+const float Boids::MIN_V = 1.25;
+const float Boids::MIN_V_G = 1.005;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -111,7 +111,9 @@ int Boids::window(void)
         }*/
 
       Change_velocity_prey();
+      Change_velocity_predator();
       Change_position_prey();
+      Change_position_predator();
 			// Erase of the boids
       win.draw_fsquare(0,0,MAX_X,MAX_Y,0x55AAFF);
   		
@@ -216,10 +218,79 @@ int Boids::Change_velocity_prey(void)
             if (preys[i].Get_vx()<0) preys[i].Set_vx(preys[i].Get_vx_next()+1);
             if (preys[i].Get_vy()<0) preys[i].Set_vy(preys[i].Get_vy_next()+1);
           }
-
   			}
 	return 0;
 }
+
+
+
+
+int Boids::Change_position_predator(void)
+{
+  for(int i = 0; i<N_P; i++)
+        {
+          // Forbide the boids to leave the window
+          if (predators[i].Get_x()<0 || predators[i].Get_x()>MAX_X)
+          {
+            predators[i].Set_vx(-predators[i].Get_vx());
+          }
+          if (predators[i].Get_y()<0 || predators[i].Get_y()>MAX_Y)
+          {
+            predators[i].Set_vy(-predators[i].Get_vy());
+          }
+
+          // equation (1): x(t+dt) = x(t)+ dt*v(t)
+          predators[i].Set_x_next(predators[i].Get_x()+predators[i].Get_vx()/20);
+          predators[i].Set_y_next(predators[i].Get_y()+predators[i].Get_vy()/20);
+        }
+  for(int i = 0; i<N_P; i++)
+        {
+          // Apply the computed positions
+          predators[i].Set_x(predators[i].Get_x_next());
+          predators[i].Set_y(predators[i].Get_y_next());/*
+          printf("predators[%d].x = %lf\t",i,predators[i].Get_x());
+          printf("predators[%d].y = %lf\n",i,predators[i].Get_y());*/
+        }
+  return 0;
+}
+
+int Boids::Change_velocity_predator(void)
+{
+    for(int i = 0; i<N_P; i++)
+        {
+          int range = 3; // range of random change
+          predators[i].Set_vx_next(predators[i].Get_vx()+(rand()%(range)-range/2));
+          predators[i].Set_vy_next(predators[i].Get_vy()+(rand()%(range)-range/2));
+          // Set a mimimun speed
+          if ( sqrt((predators[i].Get_vx_next()*predators[i].Get_vy_next())*(predators[i].Get_vx_next()*predators[i].Get_vy_next()))<MIN_V)
+          {
+            predators[i].Set_vx_next(predators[i].Get_vx_next()*MIN_V_G);
+            predators[i].Set_vy_next(predators[i].Get_vy_next()*MIN_V_G);
+          }
+
+        }
+  for(int i = 0; i<N_P; i++)
+        {
+          // Forbide the boids to go too fast
+          if (sqrt(predators[i].Get_vx()*predators[i].Get_vx()+
+              predators[i].Get_vy()*predators[i].Get_vy()<MAX_V))
+          {
+            // Apply the computed velocities
+            predators[i].Set_vx(predators[i].Get_vx_next());
+            predators[i].Set_vy(predators[i].Get_vy_next());
+          } else 
+          {
+            // Reduce the speed? /!\ /!\ /!\ Should use Get_v_next()?
+            if (predators[i].Get_vx()>0) predators[i].Set_vx(predators[i].Get_vx_next()-1);
+            if (predators[i].Get_vy()>0) predators[i].Set_vy(predators[i].Get_vy_next()-1);
+            if (predators[i].Get_vx()<0) predators[i].Set_vx(predators[i].Get_vx_next()+1);
+            if (predators[i].Get_vy()<0) predators[i].Set_vy(predators[i].Get_vy_next()+1);
+          }
+        }
+  return 0;
+}
+
+
 
 
 bool Boids::Is_prey_in_range(int i, int j, float R)

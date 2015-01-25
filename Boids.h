@@ -100,6 +100,8 @@ class Boids
     // =======================================================================
     int Change_position_prey(void);
     int Change_velocity_prey(void);
+    int Change_position_predator(void);
+    int Change_velocity_predator(void);
     float v1_x(int i);
     float v2_x(int i);
     float v3_x(int i);
