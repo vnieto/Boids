@@ -122,9 +122,12 @@ class Boids
     int N_P;
     Obstacle * obstacles;
     int N_O;
+    static const float DT;
+    static const float DT_P;
     static const int MAX_X;
     static const int MAX_Y;
     static const int MAX_V;
+    static const int MAX_V_P;
     static const float MIN_V;
     static const float MIN_V_G;
 };
