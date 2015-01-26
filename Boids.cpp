@@ -170,35 +170,33 @@ int Boids::Change_position_prey(void)
             // equation (1): x(t+dt) = x(t)+ dt*v(t)
             preys[i].Set_x_next(preys[i].Get_x()+preys[i].Get_vx()*DT);
             preys[i].Set_y_next(preys[i].Get_y()+preys[i].Get_vy()*DT);
-          } else {
-
-          }
-  			}
-	for(int i = 0; i<N; i++)
-  			{
-  				// Apply the computed positions
-  				preys[i].Set_x(preys[i].Get_x_next());
-  				preys[i].Set_y(preys[i].Get_y_next());/*
-  				printf("preys[%d].x = %lf\t",i,preys[i].Get_x());
-  				printf("preys[%d].y = %lf\n",i,preys[i].Get_y());*/
+          
+   	  			// Apply the computed positions
+    				preys[i].Set_x(preys[i].Get_x_next());
+  		  		preys[i].Set_y(preys[i].Get_y_next());/*
+  			  	printf("preys[%d].x = %lf\t",i,preys[i].Get_x());
+  				  printf("preys[%d].y = %lf\n",i,preys[i].Get_y());*/
                     // Forbide the boids to leave the window
-          if (preys[i].Get_x()<EDGE)
-          {
-            preys[i].Set_x(EDGE);
-            preys[i].Set_vx(abs(preys[i].Get_vx()));
-          } else if (preys[i].Get_x()>MAX_X-EDGE)
-          {
-            preys[i].Set_x(MAX_X-EDGE);
-            preys[i].Set_vx(-abs(preys[i].Get_vx()));
-          }
-          if (preys[i].Get_y()<EDGE)
-          {
-            preys[i].Set_y(EDGE);
-            preys[i].Set_vy(abs(preys[i].Get_vy()));
-          } else if (preys[i].Get_y()>MAX_Y-EDGE)
-          {
-            preys[i].Set_y(MAX_Y-EDGE);
-            preys[i].Set_vy(-abs(preys[i].Get_vy()));
+            if (preys[i].Get_x()<EDGE)
+            {
+              preys[i].Set_x(EDGE);
+              preys[i].Set_vx(abs(preys[i].Get_vx()));
+            } else if (preys[i].Get_x()>MAX_X-EDGE)
+            {
+              preys[i].Set_x(MAX_X-EDGE);
+              preys[i].Set_vx(-abs(preys[i].Get_vx()));
+            }
+            if (preys[i].Get_y()<EDGE)
+            {
+              preys[i].Set_y(EDGE);
+              preys[i].Set_vy(abs(preys[i].Get_vy()));
+            } else if (preys[i].Get_y()>MAX_Y-EDGE)
+            {
+              preys[i].Set_y(MAX_Y-EDGE);
+              preys[i].Set_vy(-abs(preys[i].Get_vy()));
+            }
+          } else {
+            preys[i].Dies();
           }
   			}
 	return 0;
