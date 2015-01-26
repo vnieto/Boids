@@ -32,8 +32,8 @@
 // ===========================================================================
 const float Boids::DT = 0.1;
 const float Boids::DT_P = 0.1;
-const int Boids::MAX_X = 900;
-const int Boids::MAX_Y = 900;
+const int Boids::MAX_X = 750;
+const int Boids::MAX_Y = 750;
 const int Boids::EDGE = 5;
 const int Boids::MAX_V = 15;
 const int Boids::MAX_V_P = 10;
@@ -297,11 +297,12 @@ int Boids::Change_velocity_predator(void)
 {
   int prey_index;
   float GP1 = predators[0].Get_GP1();
+  float GP2 = predators[0].Get_GP2();
   for(int i = 0; i<N_P; i++)
       {
         prey_index = Closest_prey_in_range(i, predators[i].Get_PERCEPTION_RADIUS_P());
-        predators[i].Set_vx_next(GP1*v1_p_x(i,prey_index));//predators[i].Get_vx()
-        predators[i].Set_vy_next(GP1*v1_p_y(i,prey_index));//predators[i].Get_vy()
+        predators[i].Set_vx_next(GP1*v1_p_x(i,prey_index)+GP2*v2_p_x(i));//predators[i].Get_vx()
+        predators[i].Set_vy_next(GP1*v1_p_y(i,prey_index)+GP2*v2_p_y(i));//predators[i].Get_vy()
         // Set a mimimun speed
         if ( sqrt((predators[i].Get_vx_next()*predators[i].Get_vx_next())+(predators[i].Get_vy_next()*predators[i].Get_vy_next()))<MIN_V)
         {
@@ -367,6 +368,23 @@ bool Boids::Is_obstacle_in_range(int i, int j, float R)
   float xi,yi,xj,yj;
   xi = preys[i].Get_x();
   yi = preys[i].Get_y();
+  xj = obstacles[j].Get_x();
+  yj = obstacles[j].Get_y();
+  if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < obstacles[0].Get_G_OBS()*R)
+  {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+
+bool Boids::Is_obstacle_in_range_P(int i, int j, float R)
+{
+  float xi,yi,xj,yj;
+  xi = predators[i].Get_x();
+  yi = predators[i].Get_y();
   xj = obstacles[j].Get_x();
   yj = obstacles[j].Get_y();
   if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < obstacles[0].Get_G_OBS()*R)
@@ -700,6 +718,64 @@ float Boids::v1_p_y(int i, int prey_index)
     vyi = (disty/(dist+0.001))*predators[i].Get_VP();
   }
   return vyi;
+}
+
+
+ // Avoiding collisions with obstacles
+float Boids::v2_p_x(int i)
+{
+  float vxi_O=0;
+  float dist=0;
+  float distx=0;
+  float disty=0;
+  int Obs = 0; // number of obstacles j in the CONTACT_RADIUS of the prey i
+  for (int j=0; j<N_O; j++)
+    {
+      if (Is_obstacle_in_range(i,j,preys[0].Get_CONTACT_RADIUS()))
+      {
+        distx = (obstacles[j].Get_x() - predators[i].Get_x());
+        disty = (obstacles[j].Get_y() - predators[i].Get_y());
+        dist = sqrt(distx*distx+disty*disty);
+        vxi_O = vxi_O + distx/(abs(dist)+0.01);
+        //vxi_O = vxi_O + 1/(obstacles[j].Get_x() - predators[i].Get_x());
+        //vxi_O = vxi_O + obstacles[j].Get_x() - predators[i].Get_x();
+        Obs++;
+      }
+    }
+  if (Obs==0)
+  {
+    return 0;// Avoid impossible division
+  }
+  vxi_O = - vxi_O/Obs;
+  return vxi_O;
+}
+ // Avoiding collisions with obstacles
+float Boids::v2_p_y(int i)
+{
+  float vyi_O=0;
+  float dist=0;
+  float distx=0;
+  float disty=0;
+  int Obs = 0; // number of obstacles j in the CONTACT_RADIUS of the prey i
+  for (int j=0; j<N_O; j++)
+    {
+      if (Is_obstacle_in_range(i,j,preys[0].Get_CONTACT_RADIUS()))
+      {
+        distx = (obstacles[j].Get_x() - predators[i].Get_x());
+        disty = (obstacles[j].Get_y() - predators[i].Get_y());
+        dist = sqrt(distx*distx+disty*disty);
+        vyi_O = vyi_O + disty/(abs(dist)+0.01);
+        //vyi_O = vyi_O + 1/(obstacles[j].Get_y() - predators[i].Get_y());
+        //vyi_O = vyi_O + obstacles[j].Get_y() - predators[i].Get_y();
+        Obs++;
+      }
+    }
+  if (Obs==0)
+  {
+    return 0;// Avoid impossible division
+  }
+  vyi_O = - vyi_O/Obs;
+  return vyi_O;
 }
 
 

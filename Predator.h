@@ -67,6 +67,7 @@ class Predator : public Agent
     inline bool Is_eating(void) const;
     inline float Get_GP(void) const;
     inline float Get_GP1(void) const;
+    inline float Get_GP2(void) const;
     inline float Get_VP(void) const;
     inline float Get_PERCEPTION_RADIUS_P(void) const;
     inline float Get_CONTACT_RADIUS_P(void) const;
@@ -126,6 +127,7 @@ class Predator : public Agent
     long int time_since_stop;
     static const float GP;
     static const float GP1;
+    static const float GP2;
     static const float VP;
     static const float PERCEPTION_RADIUS_P;
     static const float CONTACT_RADIUS_P;
@@ -190,6 +192,11 @@ inline float Predator::Get_GP(void) const
 inline float Predator::Get_GP1(void) const
 {
   return GP1;
+}
+
+inline float Predator::Get_GP2(void) const
+{
+  return GP2;
 }
 
 inline float Predator::Get_VP(void) const
