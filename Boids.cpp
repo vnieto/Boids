@@ -32,8 +32,8 @@
 // ===========================================================================
 const float Boids::DT = 0.1;
 const float Boids::DT_P = 0.1;
-const int Boids::MAX_X = 800;
-const int Boids::MAX_Y = 800;
+const int Boids::MAX_X = 900;
+const int Boids::MAX_Y = 900;
 const int Boids::EDGE = 5;
 const int Boids::MAX_V = 15;
 const int Boids::MAX_V_P = 10;
@@ -667,7 +667,10 @@ float Boids::v1_p_x(int i, int prey_index)
   if (prey_index < 0) // Random movement
   {
     int range = 3; // range of random change
-    vxi = predators[i].Get_vx() + (rand()%(range)-range/2);
+    distx = predators[i].Get_vx() + (rand()%(range)-range/2);
+    disty = predators[i].Get_vy() + (rand()%(range)-range/2);
+    dist = sqrt(distx*distx+disty*disty);
+    vxi = (distx/(dist+0.001))*predators[i].Get_VP();
   } else {
     distx = (preys[prey_index].Get_x() - predators[i].Get_x());
     disty = (preys[prey_index].Get_y() - predators[i].Get_y());
@@ -686,7 +689,10 @@ float Boids::v1_p_y(int i, int prey_index)
   if (prey_index < 0) // Random movement
   {
     int range = 3; // range of random change
-    vyi = predators[i].Get_vy() + (rand()%(range)-range/2);
+    distx = predators[i].Get_vx() + (rand()%(range)-range/2);
+    disty = predators[i].Get_vy() + (rand()%(range)-range/2);
+    dist = sqrt(distx*distx+disty*disty);
+    vyi = (disty/(dist+0.001))*predators[i].Get_VP();
   } else {
     distx = (preys[prey_index].Get_x() - predators[i].Get_x());
     disty = (preys[prey_index].Get_y() - predators[i].Get_y());

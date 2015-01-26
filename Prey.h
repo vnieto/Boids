@@ -266,13 +266,7 @@ inline void Prey::Dies(void)
 {
   alive = false;
   x = sqrt(-1);
-  y = sqrt(-1);/*
-  vx = sqrt(-1);
-  vy = sqrt(-1);
-  x_next = sqrt(-1);
-  y_next = sqrt(-1);
-  vx_next = sqrt(-1);
-  vy_next = sqrt(-1);*/
+  y = sqrt(-1);
 }
 
 inline void Prey::Lives(void)

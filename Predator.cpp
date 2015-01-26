@@ -32,8 +32,8 @@
 // ===========================================================================
 const float Predator::GP = 0.0005;
 const float Predator::GP1 = 1.5;
-const float Predator::VP = 2.5;
-const float Predator::PERCEPTION_RADIUS_P=150;
+const float Predator::VP = 3;
+const float Predator::PERCEPTION_RADIUS_P=100;
 const float Predator::CONTACT_RADIUS_P=3;
 const long int Predator::LENGTH_OF_EATING_PROCESS=3; // In seconds
 // ===========================================================================
