@@ -35,10 +35,10 @@ const float Boids::DT_P = 0.07;
 const int Boids::MAX_X = 800;
 const int Boids::MAX_Y = 600;
 const int Boids::EDGE = 5;
-const int Boids::MAX_V = 9;
+const int Boids::MAX_V = 15;
 const int Boids::MAX_V_P = 10;
 const float Boids::MIN_V = 1.25;
-const float Boids::MIN_V_G = 1.01;
+const float Boids::MIN_V_G = 1.05;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -389,16 +389,21 @@ int Boids::Closest_prey_in_range(int p, float R)
 
 
 
-
+// Lining up velocities
 float Boids::v1_x(int i)
 {
   int K = 0; // number of preys j in the PERCEPTION_RADIUS of the prey i
   float vxi=0;
+  float dist,distx,disty;
   for (int j=0; j<N; j++)
     {
       if (Is_prey_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
-        vxi = vxi + preys[j].Get_vx() - preys[i].Get_vx();
+        distx = (preys[j].Get_vx() - preys[i].Get_vx());
+        disty = (preys[j].Get_vy() - preys[i].Get_vy());
+        dist = sqrt(distx*distx+disty*disty);
+        //vyi = vyi + disty/(abs(dist)+0.001);
+        vxi = vxi + distx/(abs(dist)+0.001);
         K++;
       }
     }
@@ -406,15 +411,20 @@ float Boids::v1_x(int i)
   vxi = vxi/K;
   return vxi;
 }
+// Lining up velocities
 float Boids::v1_y(int i)
 {
   int K = 0; // number of preys j in the PERCEPTION_RADIUS of the prey i
   float vyi=0;
+  float dist,distx,disty;
   for (int j=0; j<N; j++)
     {
       if (Is_prey_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
-        vyi = vyi + preys[j].Get_vy() - preys[i].Get_vy();
+        distx = (preys[j].Get_vx() - preys[i].Get_vx());
+        disty = (preys[j].Get_vy() - preys[i].Get_vy());
+        dist = sqrt(distx*distx+disty*disty);
+        vyi = vyi + disty/(abs(dist)+0.001);
         K++;
       }
     }
@@ -424,6 +434,7 @@ float Boids::v1_y(int i)
 }
 
 
+// Heading towards the center of the group
 float Boids::v2_x(int i)
 {
   int K = 0; // number of preys j in the PERCEPTION_RADIUS of the prey i
@@ -440,6 +451,7 @@ float Boids::v2_x(int i)
   vxi = vxi/K;
   return vxi;
 }
+// Heading towards the center of the group
 float Boids::v2_y(int i)
 {
   int K = 0; // number of preys j in the PERCEPTION_RADIUS of the prey i
@@ -459,6 +471,7 @@ float Boids::v2_y(int i)
 }
 
 
+// Avoiding collision with preys and obstacles
 float Boids::v3_x(int i)
 {
   // Collision with PREYS
@@ -501,7 +514,7 @@ float Boids::v3_x(int i)
   }
   return vxi;
 }
-
+// Avoiding collision with preys and obstacles
 float Boids::v3_y(int i)
 {
   // Collision with PREYS
@@ -541,6 +554,7 @@ if (K!=0)// Avoid impossible division
 }
 
 
+// Fleeing predators
 float Boids::v4_x(int i)
 {
   int P = 0; // number of predators j in the PERCEPTION_RADIUS of the prey i
@@ -561,6 +575,7 @@ float Boids::v4_x(int i)
   vxi = - vxi/P;
   return vxi;
 }
+// Fleeing predators
 float Boids::v4_y(int i)
 {
   int P = 0; // number of predators j in the PERCEPTION_RADIUS of the prey i
@@ -584,7 +599,7 @@ float Boids::v4_y(int i)
 }
 
 
-
+// Chasing preys
 float Boids::v1_p_x(int i, int prey_index)
 {
   float vxi=0;
@@ -603,7 +618,7 @@ float Boids::v1_p_x(int i, int prey_index)
   }
   return vxi;
 }
-
+// Chasing preys
 float Boids::v1_p_y(int i, int prey_index)
 {
   float vyi=0;
