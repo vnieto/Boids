@@ -30,8 +30,8 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const float Boids::DT = 0.05;
-const float Boids::DT_P = 0.07;
+const float Boids::DT = 0.1;
+const float Boids::DT_P = 0.1;
 const int Boids::MAX_X = 800;
 const int Boids::MAX_Y = 600;
 const int Boids::EDGE = 5;
@@ -402,7 +402,6 @@ float Boids::v1_x(int i)
         distx = (preys[j].Get_vx() - preys[i].Get_vx());
         disty = (preys[j].Get_vy() - preys[i].Get_vy());
         dist = sqrt(distx*distx+disty*disty);
-        //vyi = vyi + disty/(abs(dist)+0.001);
         vxi = vxi + distx/(abs(dist)+0.001);
         K++;
       }
@@ -439,11 +438,16 @@ float Boids::v2_x(int i)
 {
   int K = 0; // number of preys j in the PERCEPTION_RADIUS of the prey i
   float vxi=0;
+  float dist,distx,disty;
   for (int j=0; j<N; j++)
     {
       if (Is_prey_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
-        vxi = vxi + preys[j].Get_x() - preys[i].Get_x();
+        distx = (preys[j].Get_x() - preys[i].Get_x());
+        disty = (preys[j].Get_y() - preys[i].Get_y());
+        dist = sqrt(distx*distx+disty*disty);
+        vxi = vxi + distx/(abs(dist)+0.001);
+        //vxi = vxi + preys[j].Get_x() - preys[i].Get_x();
         K++;
       }
     }
@@ -456,11 +460,16 @@ float Boids::v2_y(int i)
 {
   int K = 0; // number of preys j in the PERCEPTION_RADIUS of the prey i
   float vyi=0;
+  float dist,distx,disty;
   for (int j=0; j<N; j++)
     {
       if (Is_prey_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
-        vyi = vyi + preys[j].Get_y() - preys[i].Get_y();
+        distx = (preys[j].Get_x() - preys[i].Get_x());
+        disty = (preys[j].Get_y() - preys[i].Get_y());
+        dist = sqrt(distx*distx+disty*disty);
+        vyi = vyi + disty/(abs(dist)+0.001);
+        //vyi = vyi + preys[j].Get_y() - preys[i].Get_y();
         K++;
       }
     }
