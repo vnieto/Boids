@@ -44,8 +44,12 @@ const float Boids::MIN_V_G = 1.05;
 // ===========================================================================
 Boids::Boids(void)
 {
-  preys = NULL;
   N = 0;
+  N_P = 0;
+  N_O = 0;
+  preys = NULL;
+  predators = NULL;
+  obstacles = NULL;
 }
 
 Boids::Boids(int a_N, int a_N_P, int a_N_O)
@@ -447,7 +451,6 @@ float Boids::v2_x(int i)
         disty = (preys[j].Get_y() - preys[i].Get_y());
         dist = sqrt(distx*distx+disty*disty);
         vxi = vxi + distx/(abs(dist)+0.001);
-        //vxi = vxi + preys[j].Get_x() - preys[i].Get_x();
         K++;
       }
     }
@@ -469,7 +472,6 @@ float Boids::v2_y(int i)
         disty = (preys[j].Get_y() - preys[i].Get_y());
         dist = sqrt(distx*distx+disty*disty);
         vyi = vyi + disty/(abs(dist)+0.001);
-        //vyi = vyi + preys[j].Get_y() - preys[i].Get_y();
         K++;
       }
     }
@@ -486,12 +488,16 @@ float Boids::v3_x(int i)
   // Collision with PREYS
   int K = 0; // number of preys j in the CONTACT_RADIUS of the prey i
   float vxi=0;
+  float dist,distx,disty;
   for (int j=0; j<N; j++)
     {
       if (Is_prey_in_range(i,j,preys[i].Get_CONTACT_RADIUS()))
       {
-        //vxi = vxi + 1/(preys[j].Get_x() - preys[i].Get_x());
-        vxi = vxi + preys[j].Get_x() - preys[i].Get_x();
+        distx = (preys[j].Get_x() - preys[i].Get_x());
+        disty = (preys[j].Get_y() - preys[i].Get_y());
+        dist = sqrt(distx*distx+disty*disty);
+        vxi = vxi + distx/(abs(dist)+0.01);
+        //vxi = vxi + preys[j].Get_x() - preys[i].Get_x();
         K++;
       }
     }
@@ -529,12 +535,16 @@ float Boids::v3_y(int i)
   // Collision with PREYS
   int K = 0; // number of preys j in the CONTACT_RADIUS of the prey i
   float vyi=0;
+  float dist,distx,disty;
   for (int j=0; j<N; j++)
     {
       if (Is_prey_in_range(i,j,preys[i].Get_CONTACT_RADIUS()))
       {
-        //vyi = vyi + 1/(preys[j].Get_y() - preys[i].Get_y());
-        vyi = vyi + preys[j].Get_y() - preys[i].Get_y();
+        distx = (preys[j].Get_x() - preys[i].Get_x());
+        disty = (preys[j].Get_y() - preys[i].Get_y());
+        dist = sqrt(distx*distx+disty*disty);
+        vyi = vyi + disty/(abs(dist)+0.01);
+        //vyi = vyi + preys[j].Get_y() - preys[i].Get_y();
         K++;
       }
     }
