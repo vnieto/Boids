@@ -33,12 +33,12 @@
 const float Boids::DT = 0.1;
 const float Boids::DT_P = 0.1;
 const int Boids::MAX_X = 800;
-const int Boids::MAX_Y = 600;
+const int Boids::MAX_Y = 800;
 const int Boids::EDGE = 5;
 const int Boids::MAX_V = 15;
 const int Boids::MAX_V_P = 10;
-const float Boids::MIN_V = 1.25;
-const float Boids::MIN_V_G = 1.05;
+const float Boids::MIN_V = 1.5;
+const float Boids::MIN_V_G = 1.1;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -510,7 +510,6 @@ float Boids::v3_x(int i)
   {
     vxi = - vxi/K;
   }
-  
   // Collision with OBSTACLES
   int Obs = 0; // number of obstacles j in the CONTACT_RADIUS of the prey i
   float vxi_O=0;
@@ -518,8 +517,13 @@ float Boids::v3_x(int i)
     {
       if (Is_obstacle_in_range(i,j,preys[i].Get_CONTACT_RADIUS()))
       {
-        vxi_O = vxi_O + 1/(obstacles[j].Get_x() - preys[i].Get_x());
-        vxi_O = vxi_O + obstacles[j].Get_x() - preys[i].Get_x();
+        distx = (obstacles[j].Get_x() - preys[i].Get_x());
+        disty = (obstacles[j].Get_y() - preys[i].Get_y());
+        dist = sqrt(distx*distx+disty*disty);
+        vxi_O = vxi_O + distx/(abs(dist)+0.01);
+
+        //vxi_O = vxi_O + 1/(obstacles[j].Get_x() - preys[i].Get_x());
+        //vxi_O = vxi_O + obstacles[j].Get_x() - preys[i].Get_x();
         Obs++;
       }
     }
@@ -552,7 +556,6 @@ if (K!=0)// Avoid impossible division
   {
     vyi = - vyi/K;
   }
-  
   // Collision with OBSTACLES
   int Obs = 0; // number of obstacles j in the CONTACT_RADIUS of the prey i
   float vyi_O=0;
@@ -560,8 +563,12 @@ if (K!=0)// Avoid impossible division
     {
       if (Is_obstacle_in_range(i,j,preys[i].Get_CONTACT_RADIUS()))
       {
-        vyi_O = vyi_O + 1/(obstacles[j].Get_x() - preys[i].Get_x());
-        vyi_O = vyi_O + obstacles[j].Get_x() - preys[i].Get_x();
+        distx = (obstacles[j].Get_x() - preys[i].Get_x());
+        disty = (obstacles[j].Get_y() - preys[i].Get_y());
+        dist = sqrt(distx*distx+disty*disty);
+        vyi_O = vyi_O + disty/(abs(dist)+0.01);
+        //vyi_O = vyi_O + 1/(obstacles[j].Get_x() - preys[i].Get_x());
+        //vyi_O = vyi_O + obstacles[j].Get_x() - preys[i].Get_x();
         Obs++;
       }
     }

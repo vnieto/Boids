@@ -55,6 +55,7 @@ add a Is_alive bool to preys
 add a Is_mobile bool to predatory
 	when (Is_mobile == false) use system time
 	at the end, add a new predator
+add v3 for predators
 */
 
 // ===========================================================================
