@@ -30,10 +30,9 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const float Predator::GP = 0.0005;
 const float Predator::GP1 = 1.5; // Chasing preys
 const float Predator::GP2 = 2; // Avoiding collisions with obstacles
-const float Predator::VP = 3; // Constant velocity
+const float Predator::VP = 4; // Constant velocity
 const float Predator::PERCEPTION_RADIUS_P=100;
 const float Predator::CONTACT_RADIUS_P=3;
 const long int Predator::LENGTH_OF_EATING_PROCESS=3; // In seconds

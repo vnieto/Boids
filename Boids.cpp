@@ -30,15 +30,15 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const float Boids::DT = 0.1;
-const float Boids::DT_P = 0.1;
-const int Boids::MAX_X = 750;
-const int Boids::MAX_Y = 750;
-const int Boids::EDGE = 5;
-const int Boids::MAX_V = 15;
-const int Boids::MAX_V_P = 10;
-const float Boids::MIN_V = 1.5;
-const float Boids::MIN_V_G = 1.1;
+const float Boids::DT = 0.1; // Time coefficient for preys
+const float Boids::DT_P = 0.1; // Time coefficient for predators
+const int Boids::MAX_X = 750; // Horizontal limit of the window
+const int Boids::MAX_Y = 750; // Vertical limit of the window
+const int Boids::EDGE = 5; // Location of the edges
+const int Boids::MAX_V = 20; // Maximum velocity of the preys
+const int Boids::MAX_V_P = 20; // Maximum velocity of the predators
+const float Boids::MIN_V = 1.5; // Minimum velocity of the preys
+const float Boids::MIN_V_G = 1.1; // Gamma for minimum velocity of the preys
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================
@@ -116,7 +116,7 @@ int Boids::window(void)
 			//win.draw_line(100,100,200,200,0xFF0000);
 			//win.draw_text(10,10,0x0,"Hello World",strlen("Hello World"));
 			//win.draw_square(200,200,220,220,0xFF00);
-			//win.draw_fsquare(400,400,410,410,0xFF00FF);
+			//win.draw_fsquare(400,400,440,410,0xFF00FF);
 
       /*
       for(int i = 0; i<N; i++) // Erase of the boids one by one
@@ -173,10 +173,8 @@ int Boids::Change_position_prey(void)
           
    	  			// Apply the computed positions
     				preys[i].Set_x(preys[i].Get_x_next());
-  		  		preys[i].Set_y(preys[i].Get_y_next());/*
-  			  	printf("preys[%d].x = %lf\t",i,preys[i].Get_x());
-  				  printf("preys[%d].y = %lf\n",i,preys[i].Get_y());*/
-                    // Forbide the boids to leave the window
+  		  		preys[i].Set_y(preys[i].Get_y_next());
+            // Forbide the boids to leave the window
             if (preys[i].Get_x()<EDGE)
             {
               preys[i].Set_x(EDGE);
@@ -223,24 +221,16 @@ int Boids::Change_velocity_prey(void)
 
   			}
 	for(int i = 0; i<N; i++)
-  			{/*
-  				// Apply the computed velocities
-  				preys[i].Set_vx(preys[i].Get_vx_next());
-  				preys[i].Set_vy(preys[i].Get_vy_next());
-  				printf("preys[%d].vx = %lf\t",i,preys[i].Get_vx());
-  				printf("preys[%d].vy = %lf\n",i,preys[i].Get_vy());
-          */
+  			{
   				// Forbide the boids to go too fast
   				if (sqrt(preys[i].Get_vx()*preys[i].Get_vx()+
-              preys[i].Get_vy()*preys[i].Get_vy()<MAX_V_P))
+              preys[i].Get_vy()*preys[i].Get_vy()<MAX_V))
           {
             preys[i].Set_vx(preys[i].Get_vx_next());
             preys[i].Set_vy(preys[i].Get_vy_next());
-            //printf("preys[%d].vx = %lf\t",i,preys[i].Get_vx());
-            //printf("preys[%d].vy = %lf\n",i,preys[i].Get_vy());
           } else 
           {
-            /* Reduce the speed? /!\ /!\ /!\*/
+            /* Reduce the speed /!\ /!\ /!\*/
             preys[i].Set_vx(preys[i].Get_vx_next()*0.9);
             preys[i].Set_vy(preys[i].Get_vy_next()*0.9);
           }
@@ -413,7 +403,6 @@ int Boids::Closest_prey_in_range(int p, float R)
     {
       min_dist = dist;
       prey_index = j;
-      //printf("preys[%d].Is_alive=\t%d\n",j,preys[j].Is_alive());
     }
   }
   //Launching eating process
@@ -427,11 +416,6 @@ int Boids::Closest_prey_in_range(int p, float R)
 
 void Boids::Prey_caught(int predator_index, int prey_index)
 {
-  /*printf("preys[%d]:\tx=%lf\ty=%lf\t",prey_index,preys[prey_index].Get_x(),preys[prey_index].Get_y());
-  printf("vx=%lf\tvy=%lf\t",preys[prey_index].Get_vx(),preys[prey_index].Get_vy());
-  printf("x_n=%lf\ty_n=%lf\t",preys[prey_index].Get_x_next(),preys[prey_index].Get_y_next());
-  printf("vx_n=%lf\tvy_n=%lf\tA/D:%d\n",preys[prey_index].Get_vx_next(),preys[prey_index].Get_vy_next(),preys[prey_index].Is_alive());
-  */
   preys[prey_index].Killed();
   predators[predator_index].Starts_eating();
 }
@@ -551,11 +535,6 @@ float Boids::v3_x(int i)
         K++;
       }
     }
-  /*
-  if (K==0) return 0; // Avoid impossible division
-  vxi = - vxi/K;
-  // Collision with obstacles
-  return vxi;*/
   if (K!=0)// Avoid impossible division
   {
     vxi = - vxi/K;
@@ -571,7 +550,6 @@ float Boids::v3_x(int i)
         disty = (obstacles[j].Get_y() - preys[i].Get_y());
         dist = sqrt(distx*distx+disty*disty);
         vxi_O = vxi_O + distx/(abs(dist)+0.01);
-
         //vxi_O = vxi_O + 1/(obstacles[j].Get_x() - preys[i].Get_x());
         //vxi_O = vxi_O + obstacles[j].Get_x() - preys[i].Get_x();
         Obs++;
@@ -721,7 +699,7 @@ float Boids::v1_p_y(int i, int prey_index)
 }
 
 
- // Avoiding collisions with obstacles
+// Avoiding collisions with obstacles
 float Boids::v2_p_x(int i)
 {
   float vxi_O=0;

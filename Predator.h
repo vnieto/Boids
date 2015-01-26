@@ -65,7 +65,6 @@ class Predator : public Agent
     inline float Get_vx_next(void) const;
     inline float Get_vy_next(void) const;
     inline bool Is_eating(void) const;
-    inline float Get_GP(void) const;
     inline float Get_GP1(void) const;
     inline float Get_GP2(void) const;
     inline float Get_VP(void) const;
@@ -125,7 +124,6 @@ class Predator : public Agent
     // =======================================================================
     bool eating;
     long int time_since_stop;
-    static const float GP;
     static const float GP1;
     static const float GP2;
     static const float VP;
@@ -182,11 +180,6 @@ inline float Predator::Get_vy_next(void) const
 inline bool Predator::Is_eating(void) const
 {
   return eating;
-}
-
-inline float Predator::Get_GP(void) const
-{
-  return GP;
 }
 
 inline float Predator::Get_GP1(void) const
