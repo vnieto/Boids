@@ -36,8 +36,7 @@
 // ===========================================================================
 int main(int argc, char* argv[])
 {
-
-  Boids b(100,5,25);
+  Boids b(120,5,25);
   b.window();
   printf("Successfully compilated.\n");
   return 0;

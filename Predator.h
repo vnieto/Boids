@@ -15,7 +15,7 @@
 // ===========================================================================
 #include <cstdio>
 #include <cstdlib>
-
+#include <time.h>
 
 // ===========================================================================
 //                                Project Files
@@ -90,7 +90,7 @@ class Predator : public Agent
     // =======================================================================
     //                              Public Methods
     // =======================================================================
-
+    inline void Is_still_eating(void);
     // =======================================================================
     //                             Public Attributes
     // =======================================================================
@@ -123,11 +123,13 @@ class Predator : public Agent
     //                             Protected Attributes
     // =======================================================================
     bool eating;
+    long int time_since_stop;
     static const float GP;
     static const float GP1;
     static const float VP;
     static const float PERCEPTION_RADIUS_P;
     static const float CONTACT_RADIUS_P;
+    static const long int LENGTH_OF_EATING_PROCESS;
 };
 
 
@@ -251,6 +253,8 @@ inline void Predator::Set_vy(float a_vy)
 inline void Predator::Starts_eating(void)
 {
   eating = true;
+  time_since_stop = time(NULL);
+  //printf("time_since_stop: %li\n", time_since_stop);
 }
 
 inline void Predator::Stops_eating(void)
@@ -265,6 +269,16 @@ inline void Predator::Stops_eating(void)
 // ===========================================================================
 //                          Inline functions' definition
 // ===========================================================================
+inline void Predator::Is_still_eating(void)
+{
+  if((time(NULL)-time_since_stop)<LENGTH_OF_EATING_PROCESS)
+  {
+    eating = true;
+  } else {
+    eating = false;
+  }
+}
+
 
 
 #endif // __PREDATOR_H__

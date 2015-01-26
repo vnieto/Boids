@@ -229,7 +229,7 @@ int Boids::Change_velocity_prey(void)
   				preys[i].Set_vy(preys[i].Get_vy_next());
   				printf("preys[%d].vx = %lf\t",i,preys[i].Get_vx());
   				printf("preys[%d].vy = %lf\n",i,preys[i].Get_vy());
-*/
+          */
   				// Forbide the boids to go too fast
   				if (sqrt(preys[i].Get_vx()*preys[i].Get_vx()+
               preys[i].Get_vy()*preys[i].Get_vy()<MAX_V_P))
@@ -260,7 +260,9 @@ int Boids::Change_position_predator(void)
           predators[i].Set_y_next(predators[i].Get_y()+predators[i].Get_vy()*DT_P);
         }
   for(int i = 0; i<N_P; i++)
-        {
+  {
+    if(predators[i].Is_eating()==false)
+    {
           // Apply the computed positions
           predators[i].Set_x(predators[i].Get_x_next());
           predators[i].Set_y(predators[i].Get_y_next());
@@ -284,7 +286,10 @@ int Boids::Change_position_predator(void)
             predators[i].Set_y(MAX_Y-EDGE);
             predators[i].Set_vy(-abs(predators[i].Get_vy()));
           }
-        }
+    } else {
+      predators[i].Is_still_eating();
+    }
+  }
   return 0;
 }
 
@@ -404,16 +409,13 @@ int Boids::Closest_prey_in_range(int p, float R)
 
 void Boids::Prey_caught(int predator_index, int prey_index)
 {
-  printf("preys[%d]:\tx=%lf\ty=%lf\t",prey_index,preys[prey_index].Get_x(),preys[prey_index].Get_y());
+  /*printf("preys[%d]:\tx=%lf\ty=%lf\t",prey_index,preys[prey_index].Get_x(),preys[prey_index].Get_y());
   printf("vx=%lf\tvy=%lf\t",preys[prey_index].Get_vx(),preys[prey_index].Get_vy());
   printf("x_n=%lf\ty_n=%lf\t",preys[prey_index].Get_x_next(),preys[prey_index].Get_y_next());
   printf("vx_n=%lf\tvy_n=%lf\tA/D:%d\n",preys[prey_index].Get_vx_next(),preys[prey_index].Get_vy_next(),preys[prey_index].Is_alive());
+  */
   preys[prey_index].Killed();
   predators[predator_index].Starts_eating();
-  printf("preys[%d]:\tx=%lf\ty=%lf\t",prey_index,preys[prey_index].Get_x(),preys[prey_index].Get_y());
-  printf("vx=%lf\tvy=%lf\t",preys[prey_index].Get_vx(),preys[prey_index].Get_vy());
-  printf("x_n=%lf\ty_n=%lf\t",preys[prey_index].Get_x_next(),preys[prey_index].Get_y_next());
-  printf("vx_n=%lf\tvy_n=%lf\tA/D:%d\n",preys[prey_index].Get_vx_next(),preys[prey_index].Get_vy_next(),preys[prey_index].Is_alive());
 }
 
 
