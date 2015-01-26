@@ -53,7 +53,7 @@ isotropic changes of velocity
 add a Is_alive bool to preys
 	take off dead preys to all loops
 add a Is_mobile bool to predatory
-	when (Is_mobile == false) use system time
+	when (Is_eating == false) use system time
 	at the end, add a new predator
 add v3 for predators
 */

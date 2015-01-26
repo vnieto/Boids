@@ -64,6 +64,7 @@ class Predator : public Agent
     inline float Get_y_next(void) const;
     inline float Get_vx_next(void) const;
     inline float Get_vy_next(void) const;
+    inline bool Is_eating(void) const;
     inline float Get_GP(void) const;
     inline float Get_VP(void) const;
     inline float Get_PERCEPTION_RADIUS_P(void) const;
@@ -79,6 +80,8 @@ class Predator : public Agent
     inline void Set_y_next(float a_y);
     inline void Set_vx_next(float a_vx);
     inline void Set_vy_next(float a_vy);
+    inline void Start_eating(void);
+    inline void Stop_eating(void);
     // =======================================================================
     //                                Operators
     // =======================================================================
@@ -118,6 +121,7 @@ class Predator : public Agent
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
+    bool eating;
     static const float GP;
     static const float VP;
     static const float PERCEPTION_RADIUS_P;
@@ -167,6 +171,11 @@ inline float Predator::Get_vx_next(void) const
 inline float Predator::Get_vy_next(void) const
 {
   return vy_next;
+}
+
+inline bool Predator::Is_eating(void) const
+{
+  return eating;
 }
 
 inline float Predator::Get_GP(void) const
@@ -230,6 +239,16 @@ inline void Predator::Set_vx(float a_vx)
 inline void Predator::Set_vy(float a_vy)
 {
   vy = a_vy;
+}
+
+inline void Predator::Start_eating(void)
+{
+  eating = true;
+}
+
+inline void Predator::Stop_eating(void)
+{
+  eating = false;
 }
 
 // ===========================================================================

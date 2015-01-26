@@ -32,7 +32,7 @@
 // ===========================================================================
 const float Predator::GP = 0.0005;
 const float Predator::VP = 0.05;
-const float Predator::PERCEPTION_RADIUS_P=120;
+const float Predator::PERCEPTION_RADIUS_P=150;
 const float Predator::CONTACT_RADIUS_P=5;
 // ===========================================================================
 //                                  Constructors
@@ -43,6 +43,7 @@ Predator::Predator(void)
   y = 0;
   vx = 0;
   vy = 0;
+  eating = false;
 }
 
 Predator::Predator(float a_x, float a_y)
@@ -51,6 +52,7 @@ Predator::Predator(float a_x, float a_y)
   y = a_y;
   vx = 0;
   vy = 0;
+  eating = false;
 }
 
 Predator::Predator(float a_x, float a_y, float a_vx, float a_vy)
@@ -59,6 +61,7 @@ Predator::Predator(float a_x, float a_y, float a_vx, float a_vy)
   y = a_y;
   vx = a_vx;
   vy = a_vy;
+  eating = false;
 }
 
 // ===========================================================================
