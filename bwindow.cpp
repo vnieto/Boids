@@ -21,8 +21,8 @@ bwindow::bwindow(int w,int h)
     strcpy(icon_name,"Defwin");
     line_width = 1;
     border_width = 4;
-    //strcpy(fontname,"lucidasans-12");
-    strcpy(fontname,"9x15");
+    strcpy(fontname,"lucidasans-12"); // For BS
+    //strcpy(fontname,"9x15"); // Home
 }
 
 bwindow::bwindow(int w,int h, char * name)

@@ -545,13 +545,15 @@ float Boids::v4_x(int i)
 {
   int P = 0; // number of predators j in the PERCEPTION_RADIUS of the prey i
   float vxi=0;
-  float dist=0;
+  float dist,distx,disty;
   for (int j=0; j<N_P; j++)
     {
       if (Is_predator_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
-        dist = (predators[j].Get_x() - preys[i].Get_x());
-        vxi = vxi + dist/(abs(dist)+0.001); //0.001 Avoid a jump of the prey
+        distx = (predators[j].Get_x() - preys[i].Get_x());
+        disty = (predators[j].Get_y() - preys[i].Get_y());
+        dist = sqrt(distx*distx+disty*disty);
+        vxi = vxi + distx/(abs(dist)+0.001); //0.001 Avoid a jump of the prey
         P++;
       }
     }
@@ -563,13 +565,15 @@ float Boids::v4_y(int i)
 {
   int P = 0; // number of predators j in the PERCEPTION_RADIUS of the prey i
   float vyi=0;
-  float dist=0;
+  float dist,distx,disty;
   for (int j=0; j<N_P; j++)
     {
       if (Is_predator_in_range(i,j,preys[i].Get_PERCEPTION_RADIUS()))
       {
-        dist = (predators[j].Get_y() - preys[i].Get_y());
-        vyi = vyi + dist/(abs(dist)+0.001); //0.001 Avoid a jump of the prey
+        distx = (predators[j].Get_x() - preys[i].Get_x());
+        disty = (predators[j].Get_y() - preys[i].Get_y());
+        dist = sqrt(distx*distx+disty*disty);
+        vyi = vyi + disty/(abs(dist)+0.001); //0.001 Avoid a jump of the prey
         P++;
       }
     }
