@@ -15,6 +15,7 @@
 // ===========================================================================
 #include <cstdio>
 #include <cstdlib>
+#include <math.h>
 
 
 // ===========================================================================
@@ -64,6 +65,7 @@ class Prey : public Agent
     inline float Get_y_next(void) const;
     inline float Get_vx_next(void) const;
     inline float Get_vy_next(void) const;
+    inline bool Is_alive(void) const;
     inline float Get_G1(void) const;
     inline float Get_G2(void) const;
     inline float Get_G3(void) const;
@@ -81,6 +83,8 @@ class Prey : public Agent
     inline void Set_y_next(float a_y);
     inline void Set_vx_next(float a_vx);
     inline void Set_vy_next(float a_vy);
+    inline void dies();
+    inline void lives();
     // =======================================================================
     //                                Operators
     // =======================================================================
@@ -120,6 +124,7 @@ class Prey : public Agent
     // =======================================================================
     //                             Protected Attributes
     // =======================================================================
+    bool alive;
     static const float G1;
     static const float G2;
     static const float G3;
@@ -171,6 +176,11 @@ inline float Prey::Get_vx_next(void) const
 inline float Prey::Get_vy_next(void) const
 {
   return vy_next;
+}
+
+inline bool Prey::Is_alive(void) const
+{
+  return alive;
 }
 
 inline float Prey::Get_G1(void) const
@@ -244,6 +254,20 @@ inline void Prey::Set_vx(float a_vx)
 inline void Prey::Set_vy(float a_vy)
 {
   vy = a_vy;
+}
+
+inline void Prey::dies(void)
+{
+  alive = false;
+  x = sqrt(-1);
+  y = sqrt(-1);
+}
+
+inline void Prey::lives(void)
+{
+  alive = true;
+  x = 0;
+  y = 0;
 }
 
 // ===========================================================================

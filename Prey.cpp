@@ -45,6 +45,7 @@ Prey::Prey(void)
   y = 0;
   vx = 0;
   vy = 0;
+  alive = true;
 }
 
 Prey::Prey(float a_x, float a_y)
@@ -53,6 +54,7 @@ Prey::Prey(float a_x, float a_y)
   y = a_y;
   vx = 0;
   vy = 0;
+  alive = true;
 }
 
 Prey::Prey(float a_x, float a_y, float a_vx, float a_vy)
@@ -61,6 +63,7 @@ Prey::Prey(float a_x, float a_y, float a_vx, float a_vy)
   y = a_y;
   vx = a_vx;
   vy = a_vy;
+  alive = true;
 }
 
 // ===========================================================================

@@ -80,8 +80,8 @@ class Predator : public Agent
     inline void Set_y_next(float a_y);
     inline void Set_vx_next(float a_vx);
     inline void Set_vy_next(float a_vy);
-    inline void Start_eating(void);
-    inline void Stop_eating(void);
+    inline void Starts_eating(void);
+    inline void Stops_eating(void);
     // =======================================================================
     //                                Operators
     // =======================================================================
@@ -241,12 +241,12 @@ inline void Predator::Set_vy(float a_vy)
   vy = a_vy;
 }
 
-inline void Predator::Start_eating(void)
+inline void Predator::Starts_eating(void)
 {
   eating = true;
 }
 
-inline void Predator::Stop_eating(void)
+inline void Predator::Stops_eating(void)
 {
   eating = false;
 }
