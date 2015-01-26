@@ -83,8 +83,8 @@ class Prey : public Agent
     inline void Set_y_next(float a_y);
     inline void Set_vx_next(float a_vx);
     inline void Set_vy_next(float a_vy);
-    inline void dies();
-    inline void lives();
+    inline void Dies();
+    inline void Lives();
     // =======================================================================
     //                                Operators
     // =======================================================================
@@ -256,14 +256,14 @@ inline void Prey::Set_vy(float a_vy)
   vy = a_vy;
 }
 
-inline void Prey::dies(void)
+inline void Prey::Dies(void)
 {
   alive = false;
-  x = sqrt(-1);
-  y = sqrt(-1);
+  x_next = sqrt(-1);
+  y_next = sqrt(-1);
 }
 
-inline void Prey::lives(void)
+inline void Prey::Lives(void)
 {
   alive = true;
   x = 0;

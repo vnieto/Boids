@@ -292,8 +292,8 @@ int Boids::Change_velocity_predator(void)
   for(int i = 0; i<N_P; i++)
       {
         prey_index = Closest_prey_in_range(i, predators[i].Get_PERCEPTION_RADIUS_P());
-        predators[i].Set_vx_next(predators[i].Get_vx()+GP1*v1_p_x(i,prey_index));
-        predators[i].Set_vy_next(predators[i].Get_vy()+GP1*v1_p_y(i,prey_index));
+        predators[i].Set_vx_next(GP1*v1_p_x(i,prey_index));//predators[i].Get_vx()
+        predators[i].Set_vy_next(GP1*v1_p_y(i,prey_index));//predators[i].Get_vy()
         // Set a mimimun speed
         if ( sqrt((predators[i].Get_vx_next()*predators[i].Get_vx_next())+(predators[i].Get_vy_next()*predators[i].Get_vy_next()))<MIN_V)
         {
@@ -383,19 +383,34 @@ int Boids::Closest_prey_in_range(int p, float R)
     xj = preys[j].Get_x();
     yj = preys[j].Get_y();
     dist = sqrt((xp-xj)*(xp-xj)+(yp-yj)*(yp-yj));
-    if(dist < min_dist)
+    if(dist < min_dist && preys[j].Is_alive()==true)
     {
       min_dist = dist;
       prey_index = j;
+      //printf("preys[%d].Is_alive=\t%d\n",j,preys[j].Is_alive());
     }
   }
   //Launching eating process
   if(min_dist<predators[p].Get_CONTACT_RADIUS_P())
   {
-    printf("Dead!\t");
+    //Prey_caught(p, prey_index);
   }
   return prey_index;
 }
+
+
+void Boids::Prey_caught(int predator_index, int prey_index)
+{
+  printf("Alive preys[%d]:\tx=%lf\ty=%lf\n",prey_index,preys[prey_index].Get_x(),preys[prey_index].Get_y());
+  preys[prey_index].Dies();
+  predators[predator_index].Starts_eating();
+  printf("Dead  preys[%d]:\tx=%lf\ty=%lf\n",prey_index,preys[prey_index].Get_x(),preys[prey_index].Get_y());
+}
+
+
+
+
+
 
 
 
@@ -660,7 +675,7 @@ float Boids::v1_p_y(int i, int prey_index)
   if (prey_index < 0) // Random movement
   {
     int range = 3; // range of random change
-    vyi = predators[i].Get_vx() + (rand()%(range)-range/2);
+    vyi = predators[i].Get_vy() + (rand()%(range)-range/2);
   } else {
     distx = (preys[prey_index].Get_x() - predators[i].Get_x());
     disty = (preys[prey_index].Get_y() - predators[i].Get_y());
