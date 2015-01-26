@@ -37,7 +37,7 @@
 int main(int argc, char* argv[])
 {
 
-  Boids b(100,3,25);
+  Boids b(100,5,25);
   b.window();
   printf("Successfully compilated.\n");
   return 0;
@@ -53,7 +53,7 @@ add a Is_alive bool to preys
 add a Is_mobile bool to predatory
 	when (Is_eating == false) use system time
 	at the end, add a new predator
-add v3 for predators
+add v3 for predators (obstacles)
 */
 
 // ===========================================================================

@@ -31,9 +31,10 @@
 //                         Definition of static attributes
 // ===========================================================================
 const float Predator::GP = 0.0005;
+const float Predator::GP1 = 1.5;
 const float Predator::VP = 0.05;
 const float Predator::PERCEPTION_RADIUS_P=150;
-const float Predator::CONTACT_RADIUS_P=5;
+const float Predator::CONTACT_RADIUS_P=15;
 // ===========================================================================
 //                                  Constructors
 // ===========================================================================

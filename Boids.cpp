@@ -288,11 +288,12 @@ int Boids::Change_position_predator(void)
 int Boids::Change_velocity_predator(void)
 {
   int prey_index;
+  float GP1 = predators[0].Get_GP1();
   for(int i = 0; i<N_P; i++)
       {
         prey_index = Closest_prey_in_range(i, predators[i].Get_PERCEPTION_RADIUS_P());
-        predators[i].Set_vx_next(predators[i].Get_vx()+v1_p_x(i,prey_index));
-        predators[i].Set_vy_next(predators[i].Get_vy()+v1_p_y(i,prey_index));
+        predators[i].Set_vx_next(predators[i].Get_vx()+GP1*v1_p_x(i,prey_index));
+        predators[i].Set_vy_next(predators[i].Get_vy()+GP1*v1_p_y(i,prey_index));
         // Set a mimimun speed
         if ( sqrt((predators[i].Get_vx_next()*predators[i].Get_vx_next())+(predators[i].Get_vy_next()*predators[i].Get_vy_next()))<MIN_V)
         {
@@ -387,6 +388,11 @@ int Boids::Closest_prey_in_range(int p, float R)
       min_dist = dist;
       prey_index = j;
     }
+  }
+  //Launching eating process
+  if(min_dist<predators[p].Get_CONTACT_RADIUS_P())
+  {
+    printf("Dead!\t");
   }
   return prey_index;
 }
@@ -635,7 +641,7 @@ float Boids::v1_p_x(int i, int prey_index)
   if (prey_index < 0) // Random movement
   {
     int range = 3; // range of random change
-    vxi = (rand()%(range)-range/2);
+    vxi = predators[i].Get_vx() + (rand()%(range)-range/2);
   } else {
     distx = (preys[prey_index].Get_x() - predators[i].Get_x());
     disty = (preys[prey_index].Get_y() - predators[i].Get_y());
@@ -654,7 +660,7 @@ float Boids::v1_p_y(int i, int prey_index)
   if (prey_index < 0) // Random movement
   {
     int range = 3; // range of random change
-    vyi = (rand()%(range)-range/2);
+    vyi = predators[i].Get_vx() + (rand()%(range)-range/2);
   } else {
     distx = (preys[prey_index].Get_x() - predators[i].Get_x());
     disty = (preys[prey_index].Get_y() - predators[i].Get_y());
