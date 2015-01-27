@@ -406,7 +406,7 @@ int Boids::Closest_prey_in_range(int p, float R)
     }
   }
   //Launching eating process
-  if(min_dist<predators[p].Get_CONTACT_RADIUS_P())
+  if(min_dist<predators[p].Get_CONTACT_RADIUS_P() && predators[p].Is_eating()==false)
   {
     Prey_caught(p, prey_index);
   }
