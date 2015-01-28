@@ -32,9 +32,10 @@
 // ===========================================================================
 const float Boids::DT = 0.1; // Time coefficient for preys
 const float Boids::DT_P = 0.1; // Time coefficient for predators
-const int Boids::MAX_X = 750; // Horizontal limit of the window
-const int Boids::MAX_Y = 750; // Vertical limit of the window
-const int Boids::EDGE = 5; // Location of the edges
+const int Boids::MAX_X = 600; // Horizontal limit of the window
+const int Boids::MAX_Y = 600; // Vertical limit of the window
+const int Boids::EDGE = 0; // Location of the edges
+const int Boids::WIND = 50; // Location of the wind borders with respect to edges
 const int Boids::MAX_V = 20; // Maximum velocity of the preys
 const int Boids::MAX_V_P = 20; // Maximum velocity of the predators
 const float Boids::MIN_V = 1.5; // Minimum velocity of the preys
@@ -208,10 +209,11 @@ int Boids::Change_velocity_prey(void)
   float G2 = preys[0].Get_G2();
   float G3 = preys[0].Get_G3();
   float G4 = preys[0].Get_G4();
+  float G5 = preys[0].Get_G5();
 	for(int i = 0; i<N; i++)
   			{
-          preys[i].Set_vx_next(preys[i].Get_vx()+(G1*v1_x(i)+G2*v2_x(i)+G3*v3_x(i)+G4*v4_x(i)));
-          preys[i].Set_vy_next(preys[i].Get_vy()+(G1*v1_y(i)+G2*v2_y(i)+G3*v3_y(i)+G4*v4_y(i)));
+          preys[i].Set_vx_next(preys[i].Get_vx()+(G1*v1_x(i)+G2*v2_x(i)+G3*v3_x(i)+G4*v4_x(i)+G5*v5_x(i)));
+          preys[i].Set_vy_next(preys[i].Get_vy()+(G1*v1_y(i)+G2*v2_y(i)+G3*v3_y(i)+G4*v4_y(i)+G5*v5_y(i)));
           // Set a mimimun speed
           if ( sqrt((preys[i].Get_vx_next()*preys[i].Get_vy_next())*(preys[i].Get_vx_next()*preys[i].Get_vy_next()))<MIN_V)
           {
@@ -648,6 +650,37 @@ float Boids::v4_y(int i)
     }
   if (P==0) return 0; // Avoid impossible division
   vyi = - vyi/P;
+  return vyi;
+  return 0;
+}
+
+// Wind at borders
+float Boids::v5_x(int i)
+{
+  float vxi=0;
+  // Forbide the boids to leave the window by applying wind
+  if (preys[i].Get_x()<EDGE+WIND)
+  {
+    vxi = 1 - (preys[i].Get_x()/(EDGE+WIND));
+  } else if (preys[i].Get_x()>MAX_X-EDGE-WIND)
+  {
+    vxi = -( preys[i].Get_x() - MAX_X + EDGE+WIND ) / (EDGE+WIND);
+  }
+  return vxi;
+  return 0;
+}
+// Wind at borders
+float Boids::v5_y(int i)
+{
+  float vyi=0;
+  // Forbide the boids to leave the window by applying wind
+  if (preys[i].Get_y()<EDGE+WIND)
+  {
+    vyi = 1 - (preys[i].Get_y()/(EDGE+WIND));
+  } else if (preys[i].Get_y()>MAX_Y-EDGE-WIND)
+  {
+    vyi = -( preys[i].Get_y() - MAX_Y + EDGE+WIND ) / (EDGE+WIND);
+  }
   return vyi;
   return 0;
 }

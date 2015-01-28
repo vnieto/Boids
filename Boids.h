@@ -110,6 +110,8 @@ class Boids
     float v3_y(int i); // Avoiding collisions with preys and obstacles
     float v4_x(int i); // Fleeing predators
     float v4_y(int i); // Fleeing predators
+    float v5_x(int i); // Wind at borders
+    float v5_y(int i); // Wind at borders
     float v1_p_x(int i, int prey_index); //Chasing preys
     float v1_p_y(int i, int prey_index); //Chasing preys
     float v2_p_x(int i); // Avoiding collisions with obstacles
@@ -134,6 +136,7 @@ class Boids
     static const int MAX_X;
     static const int MAX_Y;
     static const int EDGE;
+    static const int WIND;
     static const int MAX_V;
     static const int MAX_V_P;
     static const float MIN_V;
