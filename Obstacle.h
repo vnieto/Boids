@@ -57,6 +57,7 @@ class Obstacle
     // =======================================================================
     inline float Get_x(void) const;
     inline float Get_y(void) const;
+    inline float Get_RADIUS_OBS(void) const;
     inline float Get_G_OBS(void) const;
     // =======================================================================
     //                            Accessors: setters
@@ -104,6 +105,7 @@ class Obstacle
     // =======================================================================
     float x;
     float y;
+    static const float RADIUS_OBS;
     static const float G_OBS;
 };
 
@@ -119,6 +121,11 @@ inline float Obstacle::Get_x(void) const
 inline float Obstacle::Get_y(void) const
 {
   return y;
+}
+
+inline float Obstacle::Get_RADIUS_OBS(void) const
+{
+  return RADIUS_OBS;
 }
 
 inline float Obstacle::Get_G_OBS(void) const

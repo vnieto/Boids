@@ -30,7 +30,8 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const float Obstacle::G_OBS = 10;//Increase the radius of contact with obstacles
+const float Obstacle::RADIUS_OBS = 1; // Increase the radius of contact with obstacles
+const float Obstacle::G_OBS = 5; // Coeff to avoid obstacles
 
 // ===========================================================================
 //                                  Constructors

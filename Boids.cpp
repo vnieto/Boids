@@ -92,6 +92,11 @@ Boids::~Boids(void)
 // ===========================================================================
 //                                 Public Methods
 // ===========================================================================
+
+
+//----------------------------------------------------------------------------
+//                                 MAIN LOOP
+//----------------------------------------------------------------------------
 int Boids::window(void)
 {
 	bwindow win(MAX_X,MAX_Y);
@@ -118,7 +123,6 @@ int Boids::window(void)
 			//win.draw_text(10,10,0x0,"Hello World",strlen("Hello World"));
 			//win.draw_square(200,200,220,220,0xFF00);
 			//win.draw_fsquare(400,400,440,410,0xFF00FF);
-
       /*
       for(int i = 0; i<N; i++) // Erase of the boids one by one
         {
@@ -129,8 +133,8 @@ int Boids::window(void)
       Change_velocity_predator();
       Change_position_prey();
       Change_position_predator();
-			// Erase of the boids
-      win.draw_fsquare(0,0,MAX_X,MAX_Y,0x55AAFF);
+      
+      win.draw_fsquare(0,0,MAX_X,MAX_Y,0x55AAFF); // Erase EVERYTHING
   		
       // Drawing of the obstacles
       for(int i = 0; i<N_O; i++)
@@ -149,8 +153,6 @@ int Boids::window(void)
         {
           win.draw_fsquare((predators[i].Get_x()-2),(predators[i].Get_y()-2),(predators[i].Get_x()+2),(predators[i].Get_y()+2),0xCC0000);
         }
-  		
-
     	}
   return 0;
 }
@@ -162,6 +164,13 @@ int Boids::window(void)
 // ===========================================================================
 //                                Protected Methods
 // ===========================================================================
+
+
+
+
+//----------------------------------------------------------------------------
+//                                 VELOCITY AND POSITION CHANGES
+//----------------------------------------------------------------------------
 int Boids::Change_position_prey(void)
 {
 	for(int i = 0; i<N; i++)
@@ -324,6 +333,11 @@ int Boids::Change_velocity_predator(void)
 
 
 
+
+//----------------------------------------------------------------------------
+//                                 IS_IN_RANGE TEST METHODS
+//----------------------------------------------------------------------------
+
 bool Boids::Is_prey_in_range(int i, int j, float R)
 {
   float xi,yi,xj,yj;
@@ -362,7 +376,7 @@ bool Boids::Is_obstacle_in_range(int i, int j, float R)
   yi = preys[i].Get_y();
   xj = obstacles[j].Get_x();
   yj = obstacles[j].Get_y();
-  if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < obstacles[0].Get_G_OBS()*R)
+  if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < obstacles[0].Get_RADIUS_OBS()*R)
   {
     return true;
   } else {
@@ -379,7 +393,7 @@ bool Boids::Is_obstacle_in_range_P(int i, int j, float R)
   yi = predators[i].Get_y();
   xj = obstacles[j].Get_x();
   yj = obstacles[j].Get_y();
-  if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < obstacles[0].Get_G_OBS()*R)
+  if(sqrt( (xi-xj)*(xi-xj)+(yi-yj)*(yi-yj) ) < obstacles[0].Get_RADIUS_OBS()*R)
   {
     return true;
   } else {
@@ -425,10 +439,9 @@ void Boids::Prey_caught(int predator_index, int prey_index)
 
 
 
-
-
-
-
+//----------------------------------------------------------------------------
+//                                 PREY VELOCITY METHODS
+//----------------------------------------------------------------------------
 // Lining up velocities
 float Boids::v1_x(int i)
 {
@@ -559,7 +572,7 @@ float Boids::v3_x(int i)
     }
   if (Obs!=0)// Avoid impossible division
   {
-    vxi = vxi - vxi_O/Obs;
+    vxi = vxi - obstacles[0].Get_G_OBS()*vxi_O/Obs;
   }
   return vxi;
 }
@@ -604,7 +617,7 @@ if (K!=0)// Avoid impossible division
     }
   if (Obs!=0)// Avoid impossible division
   {
-    vyi = vyi - vyi_O/Obs;
+    vyi = vyi - obstacles[0].Get_G_OBS()*vyi_O/Obs;
   }
   return vyi;
 }
@@ -686,6 +699,11 @@ float Boids::v5_y(int i)
 }
 
 
+
+
+//----------------------------------------------------------------------------
+//                                 PREY VELOCITY METHODS
+//----------------------------------------------------------------------------
 // Chasing preys
 float Boids::v1_p_x(int i, int prey_index)
 {
@@ -770,7 +788,7 @@ float Boids::v2_p_y(int i)
   int Obs = 0; // number of obstacles j in the CONTACT_RADIUS of the prey i
   for (int j=0; j<N_O; j++)
     {
-      if (Is_obstacle_in_range(i,j,preys[0].Get_CONTACT_RADIUS()))
+      if (Is_obstacle_in_range_P(i,j,preys[0].Get_CONTACT_RADIUS()))
       {
         distx = (obstacles[j].Get_x() - predators[i].Get_x());
         disty = (obstacles[j].Get_y() - predators[i].Get_y());
