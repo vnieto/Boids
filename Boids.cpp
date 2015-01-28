@@ -32,10 +32,10 @@
 // ===========================================================================
 const float Boids::DT = 0.1; // Time coefficient for preys
 const float Boids::DT_P = 0.1; // Time coefficient for predators
-const int Boids::MAX_X = 600; // Horizontal limit of the window
-const int Boids::MAX_Y = 600; // Vertical limit of the window
+const int Boids::MAX_X = 750; // Horizontal limit of the window
+const int Boids::MAX_Y = 750; // Vertical limit of the window
 const int Boids::EDGE = 0; // Location of the edges
-const int Boids::WIND = 50; // Location of the wind borders with respect to edges
+const int Boids::WIND = 25; // Location of the wind borders with respect to edges
 const int Boids::MAX_V = 20; // Maximum velocity of the preys
 const int Boids::MAX_V_P = 20; // Maximum velocity of the predators
 const float Boids::MIN_V = 1.5; // Minimum velocity of the preys
@@ -122,7 +122,7 @@ int Boids::window(void)
 			//win.draw_line(100,100,200,200,0xFF0000);
 			//win.draw_text(10,10,0x0,"Hello World",strlen("Hello World"));
 			//win.draw_square(200,200,220,220,0xFF00);
-			//win.draw_fsquare(400,400,440,410,0xFF00FF);
+			//win.draw_fsquare(400,400,425,425,0xFF00FF);
       /*
       for(int i = 0; i<N; i++) // Erase of the boids one by one
         {
@@ -135,7 +135,6 @@ int Boids::window(void)
       Change_position_predator();
       
       win.draw_fsquare(0,0,MAX_X,MAX_Y,0x55AAFF); // Erase EVERYTHING
-  		
       // Drawing of the obstacles
       for(int i = 0; i<N_O; i++)
         {
