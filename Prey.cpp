@@ -32,7 +32,7 @@
 // ===========================================================================
 const float Prey::G1 = 0.0001; // Lining up velocities 0.0001
 const float Prey::G2 = 0.075; // Heading towards the center of the group 0.075
-const float Prey::G3 = 0.1; // Avoiding collisions with preys and obstacles 0.1
+const float Prey::G3 = 0.2; // Avoiding collisions with preys and obstacles 0.1
 const float Prey::G4 = 0.2; // Fleeing predators 0.2
 const float Prey::G5 = 0.5; // Wind at borders 0.2
 const float Prey::PERCEPTION_RADIUS=100;

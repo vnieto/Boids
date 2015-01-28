@@ -82,6 +82,12 @@ Boids::Boids(int a_N, int a_N_P, int a_N_O)
 // ===========================================================================
 Boids::~Boids(void)
 {
+  delete preys;
+  preys = NULL;
+  delete predators;
+  predators = NULL;
+  delete obstacles;
+  obstacles = NULL;
 }
 
 
