@@ -127,6 +127,7 @@ class Boids
     // =======================================================================
     Prey * preys;
     int N;
+    int N_P_eaten;
     Predator * predators;
     int N_P;
     Obstacle * obstacles;

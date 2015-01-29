@@ -30,10 +30,10 @@
 // ===========================================================================
 //                         Definition of static attributes
 // ===========================================================================
-const float Boids::DT = 0.2; // Time coefficient for preys
+const float Boids::DT = 0.1; // Time coefficient for preys
 const float Boids::DT_P = 0.1; // Time coefficient for predators
-const int Boids::MAX_X = 1280; // Horizontal limit of the window (1280)
-const int Boids::MAX_Y = 950; // Vertical limit of the window (1024)
+const int Boids::MAX_X = 750; // Horizontal limit of the window (1280)
+const int Boids::MAX_Y = 750; // Vertical limit of the window (1024)
 const int Boids::EDGE = 0; // Location of the edges
 const int Boids::WIND = 25; // Location of the wind borders with respect to edges
 const int Boids::MAX_V = 20; // Maximum velocity of the preys
@@ -48,6 +48,7 @@ Boids::Boids(void)
   N = 0;
   N_P = 0;
   N_O = 0;
+  N_P_eaten = 0;
   preys = NULL;
   predators = NULL;
   obstacles = NULL;
@@ -58,6 +59,7 @@ Boids::Boids(int a_N, int a_N_P, int a_N_O)
 	N = a_N;
   N_P = a_N_P;
   N_O = a_N_O;
+  N_P_eaten = 0;
   preys = new Prey[N];
   predators = new Predator[N_P+N]; // N_P number of predators added to the number of preys
   obstacles = new Obstacle[N_O];
@@ -130,17 +132,17 @@ int Boids::window(void)
 			//win.draw_square(200,200,220,220,0xFF00);
 			//win.draw_fsquare(400,400,425,425,0xFF00FF);
       
-      for(int i = 0; i<N; i++) // Erase of the boids one by one
+      /*for(int i = 0; i<N; i++) // Erase of the boids one by one
         {
           win.draw_fsquare((preys[i].Get_x()-1),(preys[i].Get_y()-1),(preys[i].Get_x()+1),(preys[i].Get_y()+1),0xFF8800*i);
-        }
+        }*/
 
       Change_velocity_prey();
       Change_velocity_predator();
       Change_position_prey();
       Change_position_predator();
       
-      //win.draw_fsquare(0,0,MAX_X,MAX_Y,0x55AAFF); // Erase EVERYTHING
+      win.draw_fsquare(0,0,MAX_X,MAX_Y,0x55AAFF); // Erase EVERYTHING
       // Drawing of the obstacles
       for(int i = 0; i<N_O; i++)
         {
@@ -156,8 +158,8 @@ int Boids::window(void)
       // Drawing of the predators
       for(int i = 0; i<N_P; i++)
         {
-          //win.draw_fsquare((predators[i].Get_x()-2),(predators[i].Get_y()-2),(predators[i].Get_x()+2),(predators[i].Get_y()+2),0xCC0000);
-          win.draw_fsquare((predators[i].Get_x()-2),(predators[i].Get_y()-2),(predators[i].Get_x()+2),(predators[i].Get_y()+2),0x0088FF*(i+1));
+          win.draw_fsquare((predators[i].Get_x()-2),(predators[i].Get_y()-2),(predators[i].Get_x()+2),(predators[i].Get_y()+2),0xCC0000);
+          //win.draw_fsquare((predators[i].Get_x()-2),(predators[i].Get_y()-2),(predators[i].Get_x()+2),(predators[i].Get_y()+2),0x0088FF*(i+1));
         }
     	}
   return 0;
@@ -440,6 +442,10 @@ void Boids::Prey_caught(int predator_index, int prey_index)
 {
   preys[prey_index].Killed();
   predators[predator_index].Starts_eating();
+  N_P_eaten ++;
+  if (N_P_eaten<2) printf("%d prey",N_P_eaten);
+  else printf("%d preys",N_P_eaten);
+  printf(" eaten by the evil predators!\n");
 }
 
 
